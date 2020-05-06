@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { DateSingleInput } from "@datepicker-react/styled";
 
 export default styled.div`
   max-width: 80%;

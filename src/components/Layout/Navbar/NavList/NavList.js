@@ -30,7 +30,6 @@ const NavList = ({ currentUser }) => {
           <NavListItem>
             <NavItem>
               <Avatar src={currentUser.profile.avatar} />
-              <h3>{`${currentUser.profile.firstName} ${currentUser.profile.lastName}`}</h3>
               <ChevronDownIcon />
             </NavItem>
           </NavListItem>

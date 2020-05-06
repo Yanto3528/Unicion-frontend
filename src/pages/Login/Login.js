@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import LoginForm from "./LoginForm/LoginForm";
 import AuthFormHeader from "../../components/shared/AuthForm/AuthFormHeader";
+import Alert from "../../components/Alert/Alert";
 
 import AuthForm, { AuthFooter } from "../../styles/shared/AuthForm";
 import GradientBackground from "../../styles/shared/GradientBackground";
@@ -13,6 +14,7 @@ const Login = () => {
     <GradientBackground>
       <AuthForm>
         <Card width="100%">
+          <Alert />
           <AuthFormHeader
             title="Welcome back"
             subtitle="We're excited to see you again"

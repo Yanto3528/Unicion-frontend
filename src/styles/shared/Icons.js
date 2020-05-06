@@ -13,6 +13,8 @@ import { Edit } from "@styled-icons/boxicons-solid/Edit";
 import { Trash } from "@styled-icons/boxicons-regular/Trash";
 import { SearchAlt2 } from "@styled-icons/boxicons-regular/SearchAlt2";
 import { Check } from "@styled-icons/fa-solid/Check";
+import { CheckCircle } from "@styled-icons/boxicons-solid/CheckCircle";
+import { CloseCircle } from "@styled-icons/evaicons-solid/CloseCircle";
 import { Image } from "@styled-icons/boxicons-regular/Image";
 
 import { Spinner3 } from "@styled-icons/evil/Spinner3";
@@ -59,6 +61,8 @@ export const UserReceivedIcon = sidebarIconStyle(UserReceived);
 export const ChatIcon = sidebarIconStyle(Chat3);
 export const EditIcon = sidebarIconStyle(Edit);
 export const TrashIcon = sidebarIconStyle(Trash);
+export const CheckCircleIcon = sidebarIconStyle(CheckCircle);
+export const CloseCircleIcon = sidebarIconStyle(CloseCircle);
 
 export const HeartIcon = styled(sharedIconStyle(HeartCircle))`
   color: ${({ theme }) => theme.secondaryBright};

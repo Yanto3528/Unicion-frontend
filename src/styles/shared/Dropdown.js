@@ -1,4 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const slideDownIn = keyframes`
+  from {
+    transform: translateY(90%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 1;
+  }
+`;
 
 export default styled.div`
   position: absolute;
@@ -6,8 +17,9 @@ export default styled.div`
   right: 0;
   transform: translateY(100%);
   background-color: white;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.15);
+  animation: ${slideDownIn} 0.5s;
 `;
 
 export const DropdownOption = styled.div`
@@ -18,7 +30,7 @@ export const DropdownOption = styled.div`
   justify-content: flex-start;
   padding: 1rem 2rem;
   font-weight: 500;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   &:hover {
     color: white;

@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { login } from "../../../redux/users/userActions";
+import { login, clearErrors } from "../../../redux/users/userActions";
+import { setAlert } from "../../../redux/alerts/alertActions";
 
 import { AuthFormContainer } from "../../../styles/shared/AuthForm";
 import { Input, InputContainer } from "../../../styles/shared/Input";
-import Button from "../../../styles/shared/Button";
+import Button from "../../../components/shared/Button/Button";
 
-const LoginForm = ({ login, isAuthenticated, history }) => {
+const LoginForm = ({
+  login,
+  user: { isAuthenticated, loading, error },
+  history,
+  setAlert,
+  clearErrors,
+}) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,6 +26,13 @@ const LoginForm = ({ login, isAuthenticated, history }) => {
       history.push("/dashboard/newsfeed");
     }
   }, [isAuthenticated, history]);
+
+  useEffect(() => {
+    if (error) {
+      setAlert(error, "danger");
+      clearErrors();
+    }
+  }, [error, setAlert, clearErrors]);
 
   const onChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -59,13 +73,17 @@ const LoginForm = ({ login, isAuthenticated, history }) => {
           required
         />
       </InputContainer>
-      <Button block>Login</Button>
+      <Button block loading={loading}>
+        Login
+      </Button>
     </AuthFormContainer>
   );
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.user.isAuthenticated,
+  user: state.user,
 });
 
-export default withRouter(connect(mapStateToProps, { login })(LoginForm));
+export default withRouter(
+  connect(mapStateToProps, { login, setAlert, clearErrors })(LoginForm)
+);

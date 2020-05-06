@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { register } from "../../../redux/users/userActions";
+import { register, clearErrors } from "../../../redux/users/userActions";
+import { setAlert } from "../../../redux/alerts/alertActions";
 
-import { DateSingleInput } from "@datepicker-react/styled";
-
+import DatePicker from "react-datepicker";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { AuthFormContainer } from "../../../styles/shared/AuthForm";
 import {
   Input,
@@ -12,19 +13,39 @@ import {
   Select,
   Option,
 } from "../../../styles/shared/Input";
-import Button from "../../../styles/shared/Button";
+import Button from "../../../components/shared/Button/Button";
 
-const RegisterForm = ({ register, isAuthenticated, history }) => {
+import "react-datepicker/dist/react-datepicker.css";
+
+const RegisterForm = ({
+  user: { isAuthenticated, loading, error },
+  history,
+  register,
+  setAlert,
+  clearErrors,
+}) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
-    password2: "",
-    date: null,
+    address: "",
+    gender: "male",
+    country: "",
+    state: "",
+    birthDate: null,
   });
-  const [showDatePicker, setShowDatePicker] = useState(false);
-  const { firstName, lastName, email, password, password2, date } = formData;
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    address,
+    gender,
+    birthDate,
+    country,
+    state,
+  } = formData;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -32,25 +53,53 @@ const RegisterForm = ({ register, isAuthenticated, history }) => {
     }
   }, [isAuthenticated, history]);
 
+  useEffect(() => {
+    if (error) {
+      setAlert(error, "danger");
+      clearErrors();
+    }
+  }, [error, clearErrors, setAlert]);
+
   const onChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  const onDateChange = (data) => setFormData({ ...formData, date: data.date });
-  const onFocusChange = (focusedInput) => setShowDatePicker(focusedInput);
+  const onDateChange = (date) => setFormData({ ...formData, birthDate: date });
+  const onSelectCountry = (val) => {
+    setFormData({ ...formData, country: val });
+  };
+  const onSelectState = (val) => setFormData({ ...formData, state: val });
 
   const onSubmit = (event) => {
     event.preventDefault();
-    if (password !== password2) {
-      return console.log("Password do not match");
+    if (
+      country === "" ||
+      state === "" ||
+      address === "" ||
+      birthDate === null ||
+      gender === "" ||
+      firstName === "" ||
+      lastName === "" ||
+      email === "" ||
+      password === ""
+    ) {
+      return console.log("Please fill out the form");
     }
+    setFormData({
+      ...formData,
+      address: `${address}, ${state}, ${country}`,
+    });
     register(formData);
     setFormData({
       firstName: "",
       lastName: "",
       email: "",
       password: "",
-      password2: "",
+      address: "",
+      country: "",
+      state: "",
+      gender: "male",
+      birthDate: null,
     });
   };
 
@@ -80,37 +129,6 @@ const RegisterForm = ({ register, isAuthenticated, history }) => {
           required
         />
       </InputContainer>
-      <InputContainer half>
-        <label htmlFor="firstName">Status</label>
-        {/* <Input
-          type="text"
-          id="firstName"
-          name="firstName"
-          placeholder="Enter your first name"
-          value={firstName}
-          onChange={onChange}
-          required
-        /> */}
-        <Select></Select>
-      </InputContainer>
-      <InputContainer half>
-        <label htmlFor="lastName">Date of Birth</label>
-        {/* <Input
-          type="text"
-          id="lastName"
-          name="lastName"
-          placeholder="Enter your last name"
-          value={lastName}
-          onChange={onChange}
-          required
-        /> */}
-        <DateSingleInput
-          onDateChange={onDateChange}
-          onFocusChange={onFocusChange}
-          date={date}
-          showDatepicker={showDatePicker}
-        />
-      </InputContainer>
       <InputContainer>
         <label htmlFor="email">Email</label>
         <Input
@@ -132,28 +150,67 @@ const RegisterForm = ({ register, isAuthenticated, history }) => {
           placeholder="Enter your password"
           value={password}
           onChange={onChange}
+          minLength="6"
           required
         />
       </InputContainer>
+      <InputContainer half>
+        <label htmlFor="gender">Gender</label>
+        <Select value={gender} onChange={onChange} name="gender" id="gender">
+          <Option value="male">Male</Option>
+          <Option value="female">Female</Option>
+        </Select>
+      </InputContainer>
+      <InputContainer half>
+        <label htmlFor="birthDate">Date of Birth</label>
+        <DatePicker
+          selected={birthDate}
+          onChange={onDateChange}
+          calendarClassName="calender-picker"
+          id="birthDate"
+          showYearDropdown
+        />
+      </InputContainer>
+      <InputContainer half>
+        <label htmlFor="country">Country</label>
+        <CountryDropdown
+          value={country}
+          onChange={onSelectCountry}
+          id="country"
+        />
+      </InputContainer>
+      <InputContainer half>
+        <label htmlFor="state">State</label>
+        <RegionDropdown
+          country={country}
+          value={state}
+          onChange={onSelectState}
+          id="state"
+        />
+      </InputContainer>
       <InputContainer>
-        <label htmlFor="password2">Confirm Password</label>
+        <label htmlFor="address">Address</label>
         <Input
-          type="password"
-          id="password2"
-          name="password2"
-          placeholder="Confirm your password"
-          value={password2}
+          type="text"
+          id="address"
+          name="address"
+          placeholder="Enter your street address (ex. 123 street road)"
+          value={address}
           onChange={onChange}
           required
         />
       </InputContainer>
-      <Button block>Create account</Button>
+      <Button block loading={loading}>
+        Create account
+      </Button>
     </AuthFormContainer>
   );
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.user.isAuthenticated,
+  user: state.user,
 });
 
-export default withRouter(connect(mapStateToProps, { register })(RegisterForm));
+export default withRouter(
+  connect(mapStateToProps, { register, setAlert, clearErrors })(RegisterForm)
+);

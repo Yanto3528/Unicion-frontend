@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import RegisterForm from "./RegisterForm/RegisterForm";
 import AuthFormHeader from "../../components/shared/AuthForm/AuthFormHeader";
+import Alert from "../../components/Alert/Alert";
 
 import AuthForm, { AuthFooter } from "../../styles/shared/AuthForm";
 import GradientBackground from "../../styles/shared/GradientBackground";
@@ -13,6 +14,7 @@ const Register = () => {
     <GradientBackground>
       <AuthForm>
         <Card width="100%" noHidden>
+          <Alert />
           <AuthFormHeader
             title="Create new account"
             subtitle="Join now and connect with your friends."

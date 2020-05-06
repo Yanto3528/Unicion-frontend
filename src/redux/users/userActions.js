@@ -212,6 +212,13 @@ export const setLoading = (bool = true) => (dispatch) => {
   });
 };
 
+// Clear all error
+export const clearErrors = () => (dispatch) => {
+  dispatch({
+    type: userTypes.CLEAR_ERRORS,
+  });
+};
+
 const handleGetUserRequest = (endpoint, successType, failType) => async (
   dispatch
 ) => {

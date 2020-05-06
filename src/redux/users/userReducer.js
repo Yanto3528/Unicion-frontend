@@ -119,6 +119,11 @@ export default (state = initialState, action) => {
         ...state,
         loading: action.payload,
       };
+    case userTypes.CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
     default:
       return state;
   }

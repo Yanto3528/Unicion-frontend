@@ -3,18 +3,18 @@ import styled, { css } from "styled-components";
 const InputStyle = css`
   width: 100%;
   border-radius: 0.5rem;
+  border: 1px solid ${({ theme }) => theme.line};
   outline: none;
   font-family: "Montserrat", sans-serif;
+  transition: all 0.4s;
+  &:focus {
+    border-color: ${({ theme }) => theme.primary};
+  }
 `;
 
 export const Input = styled.input`
   ${InputStyle};
   padding: 1rem 2rem;
-  border: 1px solid ${({ theme }) => theme.line};
-  transition: all 0.4s;
-  &:focus {
-    border-color: ${({ theme }) => theme.primary};
-  }
 `;
 
 export const Select = styled.select`
@@ -36,6 +36,24 @@ export const InputContainer = styled.div`
     font-weight: 500;
     font-size: 1.6rem;
     color: ${({ theme }) => theme.heading};
+  }
+  select {
+    ${InputStyle}
+    padding: 1rem;
+    font-weight: 500;
+  }
+  .calender-picker {
+    transform: scale(1.5) translate(2rem, 2rem);
+  }
+  .react-datepicker-wrapper {
+    width: 100%;
+    .react-datepicker__input-container {
+      width: 100%;
+      input {
+        padding: 1rem 2rem;
+        ${InputStyle}
+      }
+    }
   }
   ${({ half }) =>
     half &&
