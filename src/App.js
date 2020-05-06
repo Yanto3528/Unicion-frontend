@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { loadUser } from "./redux/users/userActions";
+import Navbar from "./components/Layout/Navbar/Navbar";
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
-function App() {
+import setAuthToken from "./utils/setAuthToken";
+import ProtectedRoute from "./routing/ProtectedRoute";
+
+if (localStorage.token) setAuthToken(localStorage.token);
+
+const App = ({ loadUser, loading }) => {
+  useEffect(() => {
+    loadUser();
+    //eslint-disable-next-line
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Switch>
+        <ProtectedRoute path="/dashboard" component={Dashboard} />
+        <Route path="/profile/:id" component={ProfilePage} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
+        <Redirect from="/" to="/login" />
+      </Switch>
     </div>
   );
-}
+};
 
-export default App;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.user.isAuthenticated,
+  loading: state.user.loading,
+});
+
+export default connect(mapStateToProps, { loadUser })(App);

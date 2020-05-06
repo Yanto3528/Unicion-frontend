@@ -1,0 +1,15 @@
+export default {
+  primary: "#50B5FF",
+  primaryLight: "#E9F6FF",
+  primaryLight2: "#D6EAF8",
+  secondary: "#FF9B8A",
+  secondaryBright: "#ED1D40",
+  tertiary: "#3AE2BA",
+  heading: "#393939",
+  text: "#929292",
+  textLight: "#838383",
+  line: "#d6d6d6",
+  greyLight: "#888888",
+  greyDark: "#222222",
+  background: "#F1F4FF",
+};
