@@ -92,6 +92,13 @@ export const login = (formData) => async (dispatch) => {
   }
 };
 
+// Logout a user
+export const logout = () => (dispatch) => {
+  dispatch({
+    type: userTypes.LOGOUT_SUCCESS,
+  });
+};
+
 // Load currently logged in user
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -108,6 +115,28 @@ export const loadUser = () => async (dispatch) => {
     dispatch({
       type: userTypes.AUTH_FAIL,
       payload: error.response.data.error,
+    });
+  }
+};
+
+// Update user's profile
+export const updateProfile = (id, data, imageFile) => async (dispatch) => {
+  dispatch(setLoading());
+  const formData = new FormData();
+  // Append all data keys and value to formData
+  Object.keys(data).forEach((key) => formData.append(key, data[key]));
+  if (imageFile) formData.append("image", imageFile);
+  try {
+    const res = await axios.put(`/api/profiles/${id}`, formData);
+    dispatch({
+      type: userTypes.UPDATE_PROFILE_SUCCESS,
+      payload: { msg: res.data.msg, res: res.data.data },
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: userTypes.UPDATE_PROFILE_FAIL,
+      payload: error.response.data.error.msg,
     });
   }
 };
@@ -186,7 +215,7 @@ export const deleteRequest = (id) => async (dispatch) => {
   }
 };
 
-// Delete friend request
+// Delete friend
 export const deleteFriend = (id) => async (dispatch) => {
   dispatch(setLoading());
   try {

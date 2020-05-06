@@ -12,7 +12,7 @@ import Title from "../../shared/Title/Title";
 import InputFile from "../../shared/InputFile/InputFile";
 
 import Body from "../../../styles/shared/Body";
-import { ImageIcon } from "../../../styles/shared/Icons";
+import { EditImageIcon } from "../../../styles/shared/Icons";
 
 const ProfileHeader = ({ user, currentUser, uploadCoverImage }) => {
   const onChange = (event) => {
@@ -33,7 +33,7 @@ const ProfileHeader = ({ user, currentUser, uploadCoverImage }) => {
               id="upload-cover"
               onChange={onChange}
             >
-              <ImageIcon />
+              <EditImageIcon />
             </InputFile>
           </ProfileHeaderUploadContainer>
         )}

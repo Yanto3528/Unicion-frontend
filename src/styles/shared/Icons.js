@@ -15,7 +15,8 @@ import { SearchAlt2 } from "@styled-icons/boxicons-regular/SearchAlt2";
 import { Check } from "@styled-icons/fa-solid/Check";
 import { CheckCircle } from "@styled-icons/boxicons-solid/CheckCircle";
 import { CloseCircle } from "@styled-icons/evaicons-solid/CloseCircle";
-import { Image } from "@styled-icons/boxicons-regular/Image";
+import { Edit as EditAlt } from "@styled-icons/material-outlined/Edit";
+import { LogOut } from "@styled-icons/boxicons-regular/LogOut";
 
 import { Spinner3 } from "@styled-icons/evil/Spinner3";
 
@@ -51,7 +52,7 @@ export const PeopleIcon = sharedIconStyle(People);
 export const BellIcon = sharedIconStyle(Bell);
 export const ChevronDownIcon = sharedIconStyle(ChevronDown);
 export const SearchIcon = sharedIconStyle(SearchAlt2);
-export const ImageIcon = sharedIconStyle(Image);
+export const EditImageIcon = sharedIconStyle(EditAlt);
 
 // Icons for Sidebar
 export const NewsIcon = sidebarIconStyle(News);
@@ -61,6 +62,7 @@ export const UserReceivedIcon = sidebarIconStyle(UserReceived);
 export const ChatIcon = sidebarIconStyle(Chat3);
 export const EditIcon = sidebarIconStyle(Edit);
 export const TrashIcon = sidebarIconStyle(Trash);
+export const LogoutIcon = sidebarIconStyle(LogOut);
 export const CheckCircleIcon = sidebarIconStyle(CheckCircle);
 export const CloseCircleIcon = sidebarIconStyle(CloseCircle);
 

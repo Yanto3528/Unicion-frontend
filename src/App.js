@@ -7,6 +7,7 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import EditProfilePage from "./pages/EditProfilePage/EditProfilePage";
 
 import setAuthToken from "./utils/setAuthToken";
 import ProtectedRoute from "./routing/ProtectedRoute";
@@ -24,6 +25,7 @@ const App = ({ loadUser, loading }) => {
       <Switch>
         <ProtectedRoute path="/dashboard" component={Dashboard} />
         <Route path="/profile/:id" component={ProfilePage} />
+        <Route path="/edit-profile" component={EditProfilePage} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Redirect from="/" to="/login" />

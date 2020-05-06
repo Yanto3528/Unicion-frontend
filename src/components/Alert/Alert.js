@@ -9,7 +9,7 @@ const Alert = ({ alerts }) => {
   return (
     alerts.length > 0 &&
     alerts.map((alert) => (
-      <AlertContainer type={alert.type}>
+      <AlertContainer key={alert.id} type={alert.type}>
         {alert.type === "danger" ? <CloseCircleIcon /> : <CheckCircleIcon />}
         <Body>{alert.msg}</Body>
       </AlertContainer>

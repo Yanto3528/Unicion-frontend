@@ -17,6 +17,15 @@ export const Input = styled.input`
   padding: 1rem 2rem;
 `;
 
+export const Textarea = styled.textarea`
+  width: 100%;
+  resize: none;
+  padding: 1rem;
+  border: 1px solid ${({ theme }) => theme.line};
+  border-radius: 0.5rem;
+  outline: none;
+`;
+
 export const Select = styled.select`
   ${InputStyle};
   padding: 1rem;
@@ -64,4 +73,9 @@ export const InputContainer = styled.div`
         margin-right: 2rem;
       }
     `}
+`;
+
+export const InputParentContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;

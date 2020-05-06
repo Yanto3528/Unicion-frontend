@@ -8,6 +8,7 @@ const initialState = {
   isAuthenticated: false,
   loading: true,
   error: null,
+  msg: null,
 };
 
 export default (state = initialState, action) => {
@@ -52,6 +53,18 @@ export default (state = initialState, action) => {
         loading: false,
         error: null,
       };
+    case userTypes.LOGOUT_SUCCESS:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: null,
+        user: null,
+        users: [],
+        currentUser: null,
+        isAuthenticated: false,
+        loading: false,
+        error: null,
+      };
     case userTypes.SEND_FRIEND_REQUEST_SUCCESS:
       return {
         ...state,
@@ -77,10 +90,19 @@ export default (state = initialState, action) => {
         loading: false,
         error: null,
       };
+    case userTypes.UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        user: { ...state.user, profile: action.payload.res },
+        loading: false,
+        error: null,
+        msg: action.payload.msg,
+      };
     case userTypes.DELETE_FRIEND_REQUEST_FAIL:
     case userTypes.ACCEPT_FRIEND_REQUEST_FAIL:
     case userTypes.DELETE_FRIEND_FAIL:
     case userTypes.UPLOAD_COVER_PHOTO_FAIL:
+    case userTypes.UPDATE_PROFILE_FAIL:
       return {
         ...state,
         loading: false,
@@ -123,6 +145,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: null,
+        msg: null,
       };
     default:
       return state;

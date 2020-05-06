@@ -1,11 +1,12 @@
 import styled, { css } from "styled-components";
-import { ImageIcon } from "../../../styles/shared/Icons";
+import { EditImageIcon } from "../../../styles/shared/Icons";
 
 const roundedIconStyle = css`
   width: ${({ size }) => `calc(${size} + 2rem)`};
   height: ${({ size }) => `calc(${size} + 2rem)`};
   border-radius: 50%;
   background-color: white;
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.15);
 `;
 
 export const InputFileContainer = styled.div`
@@ -14,7 +15,7 @@ export const InputFileContainer = styled.div`
   position: relative;
   padding: ${({ padding }) => padding};
   ${({ roundedIcon }) => roundedIcon && roundedIconStyle}
-  ${ImageIcon} {
+  ${EditImageIcon} {
     font-size: ${({ size }) => size};
     color: ${({ theme }) => theme.primary};
     position: absolute;

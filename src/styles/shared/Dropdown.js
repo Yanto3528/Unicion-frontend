@@ -15,6 +15,7 @@ export default styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
+  width: ${({ width }) => width};
   transform: translateY(100%);
   background-color: white;
   border-radius: 0.5rem;

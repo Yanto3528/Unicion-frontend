@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import Dropdown from "../../../../styles/shared/Dropdown";
 
 const notifIcon = css`
   :after {
@@ -36,6 +37,9 @@ export const NavItem = styled.div`
   span,
   h3 {
     margin-right: 1rem;
+  }
+  ${Dropdown} {
+    bottom: -2rem;
   }
   ${({ hasNotif }) => hasNotif && notifIcon}
 `;

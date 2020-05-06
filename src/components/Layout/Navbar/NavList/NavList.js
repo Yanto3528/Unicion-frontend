@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 
 import Searchbar from "../../Searchbar/Searchbar";
+import NavbarProfileDropdown from "../NavbarProfileDropdown/NavbarProfileDropdown";
+import withDropdown from "../../../shared/HOC/withDropdown/withDropdown";
 
 import { NavListContainer, NavListItem, NavItem } from "./NavListStyle";
 import Avatar from "../../../../styles/shared/Avatar";
@@ -11,7 +13,7 @@ import {
   ChevronDownIcon,
 } from "../../../../styles/shared/Icons";
 
-const NavList = ({ currentUser }) => {
+const NavList = ({ currentUser, showDropdown, toggleDropdown }) => {
   return (
     currentUser && (
       <Fragment>
@@ -28,9 +30,10 @@ const NavList = ({ currentUser }) => {
             </NavItem>
           </NavListItem>
           <NavListItem>
-            <NavItem>
+            <NavItem onClick={toggleDropdown}>
               <Avatar src={currentUser.profile.avatar} />
               <ChevronDownIcon />
+              {showDropdown && <NavbarProfileDropdown />}
             </NavItem>
           </NavListItem>
         </NavListContainer>
@@ -43,4 +46,4 @@ const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
 });
 
-export default connect(mapStateToProps)(NavList);
+export default withDropdown(connect(mapStateToProps)(NavList));

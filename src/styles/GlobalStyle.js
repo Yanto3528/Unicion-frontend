@@ -19,6 +19,8 @@ const GlobalStyle = createGlobalStyle`
   }
   a {
     text-decoration: none;
+    color: inherit;
+    font-weight: inherit;
   }
   ul {
     list-style: none;
