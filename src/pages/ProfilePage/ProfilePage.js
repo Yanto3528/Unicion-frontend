@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUserById } from "../../redux/users/userActions";
@@ -16,17 +16,34 @@ import { ProfilePageContainer } from "./ProfilePageStyle";
 import Card from "../../styles/shared/Card";
 
 const ProfilePage = ({ match, user, currentUser, getUserById }) => {
+  const [links] = useState([
+    {
+      id: 1,
+      url: `/profile/${match.params.id}/timeline`,
+      title: "Timeline",
+    },
+    {
+      id: 2,
+      url: `/profile/${match.params.id}/about`,
+      title: "About",
+    },
+    {
+      id: 3,
+      url: `/profile/${match.params.id}/friends`,
+      title: "Friends",
+    },
+  ]);
   useEffect(() => {
     getUserById(match.params.id);
     //eslint-disable-next-line
-  }, []);
+  }, [match.params.id]);
   if (!user || !currentUser) return <Spinner fullScreen />;
   return (
     <ProfilePageContainer>
       <Card pd="0">
         <ProfileHeader />
       </Card>
-      <ProfileNav />
+      <ProfileNav links={links} />
       <Switch>
         <ProtectedRoute
           exact

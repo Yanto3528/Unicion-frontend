@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const ProfileNavContainer = styled.div`
   display: grid;
@@ -12,21 +12,23 @@ export const ProfileNavContainer = styled.div`
   box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.15);
 `;
 
-export const ProfileNavItem = styled.div`
+const activeClassName = "profile-nav-active";
+
+export const ProfileNavItemLink = styled(NavLink).attrs({ activeClassName })`
+  font-weight: 500;
+  font-size: 1.8rem;
+  color: ${({ theme }) => theme.heading};
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: white;
-  padding: 2rem;
-  cursor: pointer;
-`;
-
-export const ProfileNavItemLink = styled(Link)`
-  font-weight: 500;
-  font-size: 1.8rem;
-  color: ${({ theme }) => theme.heading};
   transition: all 0.4s;
   &:hover {
     color: ${({ theme }) => theme.primary};
+  }
+  &.${activeClassName} {
+    background-color: ${({ theme }) => theme.primary};
+    color: white;
   }
 `;

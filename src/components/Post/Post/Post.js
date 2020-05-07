@@ -36,7 +36,7 @@ const Post = ({
 }) => {
   const [showComments, setShowComments] = useState(false);
   const { profile } = post.postedBy;
-  const timeDifference = moment(post.createdAt).fromNow();
+  const timeString = moment(post.createdAt).fromNow();
   const isPostedByCurrentUser = post.postedBy._id === currentUser._id;
 
   const onDeletePost = () => {
@@ -67,7 +67,7 @@ const Post = ({
               deletePost={onDeletePost}
             />
           </PostNameContainer>
-          <PostDate>{timeDifference}</PostDate>
+          <PostDate>{timeString}</PostDate>
         </PostTitle>
       </PostHeader>
       <PostBody>

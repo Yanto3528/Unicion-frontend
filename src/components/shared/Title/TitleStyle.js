@@ -7,12 +7,10 @@ export const TitleContainer = styled.div`
   h1 {
     font-size: ${({ size }) => {
       switch (size) {
-        case "sm":
-          return "2rem";
-        case "lg":
-          return "4rem";
-        default:
+        case "md":
           return "3rem";
+        default:
+          return "2rem";
       }
     }};
   }

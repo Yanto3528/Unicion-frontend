@@ -8,7 +8,7 @@ import Spinner from "../../../components/shared/Spinner/Spinner";
 import Card from "../../../styles/shared/Card";
 import Subtitle from "../../../styles/shared/Subtitle";
 
-const ProfileFriends = ({ user, users, getUserFriends }) => {
+const ProfileFriends = ({ user, users, getUserFriends, match }) => {
   useEffect(() => {
     getUserFriends(user._id);
     //eslint-disable-next-line

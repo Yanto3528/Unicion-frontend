@@ -15,9 +15,7 @@ import Body from "../../../styles/shared/Body";
 const ProfileOverview = ({ user }) => {
   return (
     <Card>
-      <Title pd="0" size="sm">
-        Profile Intro
-      </Title>
+      <Title pd="0">Profile Intro</Title>
       {user.profile.bio && (
         <ProfileOverviewTextGroup>
           <ProfileOverviewTitle>About me</ProfileOverviewTitle>

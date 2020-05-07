@@ -98,11 +98,19 @@ export default (state = initialState, action) => {
         error: null,
         msg: action.payload.msg,
       };
+    case userTypes.CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        msg: action.payload,
+        loading: false,
+        error: null,
+      };
     case userTypes.DELETE_FRIEND_REQUEST_FAIL:
     case userTypes.ACCEPT_FRIEND_REQUEST_FAIL:
     case userTypes.DELETE_FRIEND_FAIL:
     case userTypes.UPLOAD_COVER_PHOTO_FAIL:
     case userTypes.UPDATE_PROFILE_FAIL:
+    case userTypes.CHANGE_PASSWORD_FAIL:
       return {
         ...state,
         loading: false,

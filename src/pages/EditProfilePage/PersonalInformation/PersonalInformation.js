@@ -12,13 +12,12 @@ import DatePicker from "react-datepicker";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 import {
-  PersoanlInformationContainer,
-  PersonalInformationForm,
   PersoanlInformationHeader,
   UploadAvatarContainer,
   UploadIconContainer,
-} from "./PersoanlInformationStyle";
+} from "./PersonalInformationStyle";
 import Card from "../../../styles/shared/Card";
+import Form from "../../../styles/shared/Form";
 import { EditImageIcon } from "../../../styles/shared/Icons";
 import {
   Input,
@@ -121,151 +120,150 @@ const PersonalInformation = ({
     updateProfile(profile._id, formData, imageFile);
   };
   return (
-    <PersoanlInformationContainer>
-      <Card pd="0">
+    <Card pd="0">
+      <Title pd="2rem" mb="0">
+        Personal Information
+      </Title>
+      <Form onSubmit={onSubmit}>
         <Alert />
-        <Title pd="2rem">Personal Information</Title>
-        <PersonalInformationForm onSubmit={onSubmit}>
-          <PersoanlInformationHeader>
-            <UploadAvatarContainer>
-              <Avatar src={imagePreview} size="10rem" />
-              <UploadIconContainer>
-                <InputFile
-                  roundedIcon
-                  size="2rem"
-                  id="upload-avatar"
-                  onChange={onChangeFile}
-                >
-                  <EditImageIcon />
-                </InputFile>
-              </UploadIconContainer>
-            </UploadAvatarContainer>
-          </PersoanlInformationHeader>
-          <InputParentContainer>
-            <InputContainer half>
-              <label htmlFor="firstName">First Name</label>
-              <Input
-                type="text"
-                id="firstName"
-                name="firstName"
-                placeholder="Enter your first name"
-                value={firstName}
-                onChange={onChange}
-                required
-              />
-            </InputContainer>
-            <InputContainer half>
-              <label htmlFor="lastName">Last Name</label>
-              <Input
-                type="text"
-                id="lastName"
-                name="lastName"
-                placeholder="Enter your last name"
-                value={lastName}
-                onChange={onChange}
-                required
-              />
-            </InputContainer>
-          </InputParentContainer>
-          <InputParentContainer>
-            <InputContainer half>
-              <label htmlFor="gender">Gender</label>
-              <Select
-                value={gender}
-                onChange={onChange}
-                name="gender"
-                id="gender"
+        <PersoanlInformationHeader>
+          <UploadAvatarContainer>
+            <Avatar src={imagePreview} size="10rem" />
+            <UploadIconContainer>
+              <InputFile
+                roundedIcon
+                size="2rem"
+                id="upload-avatar"
+                onChange={onChangeFile}
               >
-                <Option value="male">Male</Option>
-                <Option value="female">Female</Option>
-              </Select>
-            </InputContainer>
-            <InputContainer half>
-              <label htmlFor="birthDate">Date of Birth</label>
-              <DatePicker
-                selected={birthDate}
-                onChange={onDateChange}
-                calendarClassName="calender-picker"
-                id="birthDate"
-                showYearDropdown
-              />
-            </InputContainer>
-          </InputParentContainer>
-          <InputParentContainer>
-            <InputContainer half>
-              <label htmlFor="status">Status</label>
-              <Select
-                value={status}
-                onChange={onChange}
-                name="status"
-                id="status"
-              >
-                <Option value="single">Single</Option>
-                <Option value="relationship">In a relationship</Option>
-                <Option value="married">Married</Option>
-              </Select>
-            </InputContainer>
-            <InputContainer half>
-              <label htmlFor="occupation">Occupation</label>
-              <Input
-                type="text"
-                id="occupation"
-                name="occupation"
-                placeholder="Enter your occupation"
-                value={occupation}
-                onChange={onChange}
-                required
-              />
-            </InputContainer>
-          </InputParentContainer>
-          <InputParentContainer>
-            <InputContainer half>
-              <label htmlFor="country">Country</label>
-              <CountryDropdown
-                value={country}
-                onChange={onSelectCountry}
-                id="country"
-              />
-            </InputContainer>
-            <InputContainer half>
-              <label htmlFor="state">State</label>
-              <RegionDropdown
-                country={country}
-                value={state}
-                onChange={onSelectState}
-                id="state"
-              />
-            </InputContainer>
-          </InputParentContainer>
-
-          <InputContainer>
-            <label htmlFor="address">Address</label>
+                <EditImageIcon />
+              </InputFile>
+            </UploadIconContainer>
+          </UploadAvatarContainer>
+        </PersoanlInformationHeader>
+        <InputParentContainer>
+          <InputContainer half>
+            <label htmlFor="firstName">First Name</label>
             <Input
               type="text"
-              id="address"
-              name="address"
-              placeholder="Enter your street address (ex. 123 street road)"
-              value={address}
+              id="firstName"
+              name="firstName"
+              placeholder="Enter your first name"
+              value={firstName}
               onChange={onChange}
               required
             />
           </InputContainer>
-          <InputContainer>
-            <label htmlFor="bio">About</label>
-            <Textarea
+          <InputContainer half>
+            <label htmlFor="lastName">Last Name</label>
+            <Input
               type="text"
-              id="bio"
-              name="bio"
-              rows={4}
-              placeholder="Write something about yourself"
-              value={bio}
+              id="lastName"
+              name="lastName"
+              placeholder="Enter your last name"
+              value={lastName}
               onChange={onChange}
+              required
             />
           </InputContainer>
-          <Button loading={loading}>Save changes</Button>
-        </PersonalInformationForm>
-      </Card>
-    </PersoanlInformationContainer>
+        </InputParentContainer>
+        <InputParentContainer>
+          <InputContainer half>
+            <label htmlFor="gender">Gender</label>
+            <Select
+              value={gender}
+              onChange={onChange}
+              name="gender"
+              id="gender"
+            >
+              <Option value="male">Male</Option>
+              <Option value="female">Female</Option>
+            </Select>
+          </InputContainer>
+          <InputContainer half>
+            <label htmlFor="birthDate">Date of Birth</label>
+            <DatePicker
+              selected={birthDate}
+              onChange={onDateChange}
+              calendarClassName="calender-picker"
+              id="birthDate"
+              showYearDropdown
+            />
+          </InputContainer>
+        </InputParentContainer>
+        <InputParentContainer>
+          <InputContainer half>
+            <label htmlFor="status">Status</label>
+            <Select
+              value={status}
+              onChange={onChange}
+              name="status"
+              id="status"
+            >
+              <Option value="single">Single</Option>
+              <Option value="relationship">In a relationship</Option>
+              <Option value="married">Married</Option>
+            </Select>
+          </InputContainer>
+          <InputContainer half>
+            <label htmlFor="occupation">Occupation</label>
+            <Input
+              type="text"
+              id="occupation"
+              name="occupation"
+              placeholder="Enter your occupation"
+              value={occupation}
+              onChange={onChange}
+              required
+            />
+          </InputContainer>
+        </InputParentContainer>
+        <InputParentContainer>
+          <InputContainer half>
+            <label htmlFor="country">Country</label>
+            <CountryDropdown
+              value={country}
+              onChange={onSelectCountry}
+              id="country"
+            />
+          </InputContainer>
+          <InputContainer half>
+            <label htmlFor="state">State</label>
+            <RegionDropdown
+              country={country}
+              value={state}
+              onChange={onSelectState}
+              id="state"
+            />
+          </InputContainer>
+        </InputParentContainer>
+        <InputContainer>
+          <label htmlFor="address">Address</label>
+          <Input
+            type="text"
+            id="address"
+            name="address"
+            placeholder="Enter your street address (ex. 123 street road)"
+            value={address}
+            onChange={onChange}
+            required
+          />
+        </InputContainer>
+        <InputContainer>
+          <label htmlFor="bio">About</label>
+          <Textarea
+            type="text"
+            id="bio"
+            name="bio"
+            rows={4}
+            placeholder="Write something about yourself"
+            value={bio}
+            onChange={onChange}
+          />
+        </InputContainer>
+        <Button loading={loading}>Save changes</Button>
+      </Form>
+    </Card>
   );
 };
 

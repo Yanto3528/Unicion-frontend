@@ -23,7 +23,10 @@ const About = ({ user }) => {
         )}
         <Subtitle>Personal Information</Subtitle>
         {user.profile.birthDate && (
-          <AboutSection text="Birthdate" value={user.profile.birthDate} />
+          <AboutSection
+            text="Birthdate"
+            value={moment(user.profile.birthDate).format("LL")}
+          />
         )}
         {user.profile.gender && (
           <AboutSection text="Gender" value={user.profile.gender} />
@@ -43,18 +46,7 @@ const About = ({ user }) => {
         <Fragment>
           <Subtitle>About</Subtitle>
           <AboutGroup>
-            <AboutGroupValue>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-              finibus orci nibh, sed ornare ante dignissim at. Donec dictum,
-              orci vitae mollis placerat, augue neque posuere sem, ornare
-              vehicula nisl nibh vel ante. Curabitur pellentesque fermentum
-              ornare. Aenean at purus sit amet dui ullamcorper porttitor. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Morbi finibus
-              orci nibh, sed ornare ante dignissim at. Donec dictum, orci vitae
-              mollis placerat, augue neque posuere sem, ornare vehicula nisl
-              nibh vel ante. Curabitur pellentesque fermentum ornare. Aenean at
-              purus sit amet dui ullamcorper porttitor.
-            </AboutGroupValue>
+            <AboutGroupValue>{user.profile.bio}</AboutGroupValue>
           </AboutGroup>
         </Fragment>
       )}

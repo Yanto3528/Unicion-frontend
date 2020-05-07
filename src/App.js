@@ -24,8 +24,8 @@ const App = ({ loadUser, loading }) => {
       <Navbar />
       <Switch>
         <ProtectedRoute path="/dashboard" component={Dashboard} />
-        <Route path="/profile/:id" component={ProfilePage} />
-        <Route path="/edit-profile" component={EditProfilePage} />
+        <ProtectedRoute path="/profile/:id" component={ProfilePage} />
+        <ProtectedRoute path="/edit-profile" component={EditProfilePage} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Redirect from="/" to="/login" />

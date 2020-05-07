@@ -8,9 +8,9 @@ import {
   ProfileFriendCard,
   ProfileFriendDetail,
   ProfileFriendAvatar,
-  ProfileFriendName,
 } from "./ProfileFriendStyle";
 import Body from "../../../styles/shared/Body";
+import Name from "../../../styles/shared/Name";
 import { GreyButton } from "../../shared/Button/ButtonStyle";
 import { CheckIcon } from "../../../styles/shared/Icons";
 
@@ -33,13 +33,16 @@ const ProfileFriend = ({ user, currentUser, sendRequest, deleteFriend }) => {
     );
   else if (user.friendRequests.includes(currentUser._id))
     button = <GreyButton>Request sent</GreyButton>;
+  else if (user._id === currentUser._id) button = null;
   else button = <Button onClick={onSendFriendRequest}>Add friend</Button>;
   return (
     <ProfileFriendCard>
       <ProfileFriendDetail>
         <ProfileFriendAvatar src={user.profile.avatar} />
         <div>
-          <ProfileFriendName>{`${user.profile.firstName} ${user.profile.lastName}`}</ProfileFriendName>
+          <Name
+            to={`/profile/${user._id}/timeline`}
+          >{`${user.profile.firstName} ${user.profile.lastName}`}</Name>
           <Body>{user.friends.length} friends</Body>
         </div>
       </ProfileFriendDetail>

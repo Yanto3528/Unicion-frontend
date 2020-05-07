@@ -11,7 +11,6 @@ import Avatar from "../../../styles/shared/Avatar";
 const PostInput = ({ toggleModal, currentUser }) => {
   return (
     <Card pd="0" mb="2rem">
-      {/* <Title size="sm">Create Post</Title> */}
       <PostInputForm>
         <PostInputGroup>
           <Avatar size="4rem" src={currentUser.profile.avatar} />

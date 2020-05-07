@@ -141,6 +141,24 @@ export const updateProfile = (id, data, imageFile) => async (dispatch) => {
   }
 };
 
+// Change user password
+export const changePassword = (formData) => async (dispatch) => {
+  dispatch(setLoading());
+  try {
+    const res = await axios.put(`/api/users/update-password`, formData);
+    dispatch({
+      type: userTypes.CHANGE_PASSWORD_SUCCESS,
+      payload: res.data.msg,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: userTypes.CHANGE_PASSWORD_FAIL,
+      payload: error.response.data.error,
+    });
+  }
+};
+
 // Upload Cover image
 export const uploadCoverImage = (id, image) => async (dispatch) => {
   dispatch(setLoading());

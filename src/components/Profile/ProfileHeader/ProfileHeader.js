@@ -38,7 +38,7 @@ const ProfileHeader = ({ user, currentUser, uploadCoverImage }) => {
           </ProfileHeaderUploadContainer>
         )}
       </ProfileCoverPhoto>
-      <Title nb center>
+      <Title nb center size="md">
         {`${user.profile.firstName} ${user.profile.lastName}`}
       </Title>
       {user.profile.location && <Body>{user.profile.location.city}</Body>}

@@ -32,7 +32,3 @@ export const ProfileFriendAvatar = styled.div`
   height: 15rem;
   margin-right: 2rem;
 `;
-
-export const ProfileFriendName = styled.h3`
-  font-size: 2rem;
-`;
