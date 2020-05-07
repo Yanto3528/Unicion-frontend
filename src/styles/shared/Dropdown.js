@@ -16,6 +16,11 @@ export default styled.div`
   bottom: 0;
   right: 0;
   width: ${({ width }) => width};
+  max-height: 40rem;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   transform: translateY(100%);
   background-color: white;
   border-radius: 0.5rem;

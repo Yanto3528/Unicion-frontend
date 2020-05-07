@@ -8,7 +8,7 @@ const Newsfeed = ({ loadingPosts }) => {
   return (
     <div>
       <PostInput />
-      <PostList loading={loadingPosts} />
+      <PostList />
     </div>
   );
 };

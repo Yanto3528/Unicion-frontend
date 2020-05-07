@@ -64,6 +64,7 @@ export const EditIcon = sidebarIconStyle(Edit);
 export const TrashIcon = sidebarIconStyle(Trash);
 export const LogoutIcon = sidebarIconStyle(LogOut);
 export const CheckCircleIcon = sidebarIconStyle(CheckCircle);
+
 export const CloseCircleIcon = sidebarIconStyle(CloseCircle);
 
 export const HeartIcon = styled(sharedIconStyle(HeartCircle))`

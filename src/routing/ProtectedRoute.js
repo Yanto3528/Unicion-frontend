@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 
 const ProtectedRoute = ({
   component: Component,
-  isAuthenticated,
-  loading,
-  title,
+  user: { isAuthenticated, loading },
   ...otherProps
 }) => {
   return (
@@ -16,7 +14,7 @@ const ProtectedRoute = ({
         !isAuthenticated && !loading ? (
           <Redirect to="/login" />
         ) : (
-          <Component {...props} title={title} />
+          <Component {...props} />
         )
       }
     />
@@ -24,8 +22,7 @@ const ProtectedRoute = ({
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.user.isAuthenticated,
-  loading: state.user.loading,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(ProtectedRoute);

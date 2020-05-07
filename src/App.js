@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { loadUser } from "./redux/users/userActions";
@@ -8,35 +8,39 @@ import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import EditProfilePage from "./pages/EditProfilePage/EditProfilePage";
+import ProtectedPage from "./pages/ProtectedPage/ProtectedPage";
 
 import setAuthToken from "./utils/setAuthToken";
 import ProtectedRoute from "./routing/ProtectedRoute";
 
 if (localStorage.token) setAuthToken(localStorage.token);
 
-const App = ({ loadUser, loading }) => {
+const App = ({ loadUser, currentUser }) => {
   useEffect(() => {
     loadUser();
     //eslint-disable-next-line
   }, []);
   return (
-    <div className="App">
+    <Fragment>
       <Navbar />
       <Switch>
-        <ProtectedRoute path="/dashboard" component={Dashboard} />
+        {/* <ProtectedRoute path="/dashboard" component={Dashboard} />
         <ProtectedRoute path="/profile/:id" component={ProfilePage} />
-        <ProtectedRoute path="/edit-profile" component={EditProfilePage} />
+        <ProtectedRoute path="/edit-profile" component={EditProfilePage} /> */}
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
-        <Redirect from="/" to="/login" />
+        <Route
+          path="/"
+          render={(props) => <ProtectedPage {...props} data={currentUser} />}
+        />
+        {/* <Redirect from="/" to="/dashboard/newsfeed" /> */}
       </Switch>
-    </div>
+    </Fragment>
   );
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.user.isAuthenticated,
-  loading: state.user.loading,
+  currentUser: state.user.currentUser,
 });
 
 export default connect(mapStateToProps, { loadUser })(App);

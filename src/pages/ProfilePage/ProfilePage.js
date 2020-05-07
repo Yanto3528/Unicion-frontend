@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUserById } from "../../redux/users/userActions";
 
 import Spinner from "../../components/shared/Spinner/Spinner";
 
-import ProtectedRoute from "../../routing/ProtectedRoute";
 import ProfileHeader from "../../components/Profile/ProfileHeader/ProfileHeader";
 import ProfileNav from "../../components/Profile/ProfileNav/ProfileNav";
 import Timeline from "./Timeline/Timeline";
@@ -45,17 +44,9 @@ const ProfilePage = ({ match, user, currentUser, getUserById }) => {
       </Card>
       <ProfileNav links={links} />
       <Switch>
-        <ProtectedRoute
-          exact
-          path={`${match.url}/timeline`}
-          component={Timeline}
-        />
-        <ProtectedRoute exact path={`${match.url}/about`} component={About} />
-        <ProtectedRoute
-          exact
-          path={`${match.url}/friends`}
-          component={ProfileFriends}
-        />
+        <Route exact path={`${match.url}/timeline`} component={Timeline} />
+        <Route exact path={`${match.url}/about`} component={About} />
+        <Route exact path={`${match.url}/friends`} component={ProfileFriends} />
       </Switch>
     </ProfilePageContainer>
   );

@@ -1,5 +1,16 @@
 import styled, { css } from "styled-components";
 
+const baseInputStyle = css`
+  height: ${({ height }) => (height ? height : "10rem")};
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  padding: 1rem 0 1rem 8rem;
+  border: none;
+  resize: none;
+  outline: none;
+  transition: all 0.4s;
+`;
+
 export const PostInputForm = styled.form`
   padding: ${({ padding }) => (padding ? padding : "2rem 0")};
   ${({ modalPadding }) =>
@@ -28,13 +39,9 @@ export const PostInputGroup = styled.div`
 `;
 
 export const PostTextarea = styled.textarea`
-  height: ${({ height }) => (height ? height : "10rem")};
-  width: 100%;
-  font-family: "Montserrat", sans-serif;
-  /* padding-left: 8rem; */
-  padding: 1rem 0 1rem 8rem;
-  border: none;
-  resize: none;
-  outline: none;
-  transition: all 0.4s;
+  ${baseInputStyle}
+`;
+
+export const PostInputText = styled.input`
+  ${baseInputStyle}
 `;

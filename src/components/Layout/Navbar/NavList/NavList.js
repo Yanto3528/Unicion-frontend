@@ -1,39 +1,58 @@
-import React, { Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { connect } from "react-redux";
 
 import Searchbar from "../../Searchbar/Searchbar";
 import NavbarProfileDropdown from "../NavbarProfileDropdown/NavbarProfileDropdown";
-import withDropdown from "../../../shared/HOC/withDropdown/withDropdown";
+import NotificationDropdown from "../../../NotificationDropdown/NotificationDropdown";
 
 import { NavListContainer, NavListItem, NavItem } from "./NavListStyle";
-import Avatar from "../../../../styles/shared/Avatar";
+import Avatar from "../../../shared/Avatar/Avatar";
 import {
   PeopleIcon,
   BellIcon,
   ChevronDownIcon,
 } from "../../../../styles/shared/Icons";
 
-const NavList = ({ currentUser, showDropdown, toggleDropdown }) => {
+const NavList = ({ currentUser, notifications }) => {
+  const [showNotificationDropdown, setShowNotificationDropdown] = useState(
+    false
+  );
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const [showFriendRequestDropdown, setShowFriendRequestDropdown] = useState(
+    false
+  );
+  const hasNotif = notifications.some(
+    (notification) => notification.read === false
+  );
+
+  const onToggleNotification = () =>
+    setShowNotificationDropdown((prevState) => !prevState);
+  const onToggleProfile = () =>
+    setShowProfileDropdown((prevState) => !prevState);
+  const onToggleFriendRequest = () =>
+    setShowFriendRequestDropdown((prevState) => !prevState);
+
   return (
     currentUser && (
       <Fragment>
         <Searchbar />
         <NavListContainer>
           <NavListItem>
-            <NavItem hasNotif>
-              <PeopleIcon />
+            <NavItem hasNotif={hasNotif}>
+              <PeopleIcon onClick={onToggleFriendRequest} />
             </NavItem>
           </NavListItem>
           <NavListItem>
-            <NavItem hasNotif>
-              <BellIcon />
+            <NavItem hasNotif={hasNotif}>
+              <BellIcon onClick={onToggleNotification} />
+              {showNotificationDropdown && <NotificationDropdown />}
             </NavItem>
           </NavListItem>
           <NavListItem>
-            <NavItem onClick={toggleDropdown}>
+            <NavItem onClick={onToggleProfile}>
               <Avatar src={currentUser.profile.avatar} />
               <ChevronDownIcon />
-              {showDropdown && <NavbarProfileDropdown />}
+              {showProfileDropdown && <NavbarProfileDropdown />}
             </NavItem>
           </NavListItem>
         </NavListContainer>
@@ -44,6 +63,7 @@ const NavList = ({ currentUser, showDropdown, toggleDropdown }) => {
 
 const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
+  notifications: state.notification.notifications,
 });
 
-export default withDropdown(connect(mapStateToProps)(NavList));
+export default connect(mapStateToProps)(NavList);
