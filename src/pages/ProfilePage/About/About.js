@@ -1,7 +1,10 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
-
 import moment from "moment";
+
+import { createStructuredSelector } from "reselect";
+import { selectUser } from "../../../redux/users/userSelector";
 
 import AboutSection from "./AboutSection";
 
@@ -54,8 +57,12 @@ const About = ({ user }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.user.user,
+About.propTypes = {
+  user: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  user: selectUser,
 });
 
 export default connect(mapStateToProps)(About);

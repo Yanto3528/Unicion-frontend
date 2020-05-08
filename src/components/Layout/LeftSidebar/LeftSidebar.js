@@ -1,6 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../../redux/users/userSelector";
 
 import { LeftSidebarContainer, SidebarNavList } from "./LeftSidebarStyle";
 import {
@@ -48,8 +52,12 @@ const LeftSidebar = ({ currentUser }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+LeftSidebar.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps)(LeftSidebar);

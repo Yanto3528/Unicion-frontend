@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { changePassword, clearErrors } from "../../../redux/users/userActions";
 import { setAlert } from "../../../redux/alerts/alertActions";
+
+import { createStructuredSelector } from "reselect";
+import {
+  selectUserError,
+  selectUserMessage,
+  selectLoading,
+} from "../../../redux/users/userSelector";
 
 import Title from "../../../components/shared/Title/Title";
 import Button from "../../../components/shared/Button/Button";
@@ -12,7 +20,9 @@ import { InputContainer, Input } from "../../../styles/shared/Input";
 import Form from "../../../styles/shared/Form";
 
 const ChangePassword = ({
-  user: { error, msg, loading },
+  error,
+  msg,
+  loading,
   changePassword,
   setAlert,
   clearErrors,
@@ -97,8 +107,19 @@ const ChangePassword = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.user,
+ChangePassword.propTypes = {
+  error: PropTypes.string,
+  msg: PropTypes.string,
+  loading: PropTypes.bool.isRequired,
+  changePassword: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  error: selectUserError,
+  loading: selectLoading,
+  msg: selectUserMessage,
 });
 
 export default connect(mapStateToProps, {

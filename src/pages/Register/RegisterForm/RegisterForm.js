@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { register, clearErrors } from "../../../redux/users/userActions";
 import { setAlert } from "../../../redux/alerts/alertActions";
+
+import { createStructuredSelector } from "reselect";
+import {
+  selectIsAuthenticated,
+  selectLoading,
+  selectUserError,
+} from "../../../redux/users/userSelector";
 
 import DatePicker from "react-datepicker";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
@@ -18,7 +26,9 @@ import Button from "../../../components/shared/Button/Button";
 import "react-datepicker/dist/react-datepicker.css";
 
 const RegisterForm = ({
-  user: { isAuthenticated, loading, error },
+  isAuthenticated,
+  loading,
+  error,
   history,
   register,
   setAlert,
@@ -207,8 +217,20 @@ const RegisterForm = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.user,
+RegisterForm.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  history: PropTypes.object.isRequired,
+  register: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  isAuthenticated: selectIsAuthenticated,
+  loading: selectLoading,
+  error: selectUserError,
 });
 
 export default withRouter(

@@ -1,8 +1,14 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import Spinner from "../../shared/Spinner/Spinner";
+import { createStructuredSelector } from "reselect";
+import {
+  selectPosts,
+  selectLoadingPosts,
+} from "../../../redux/posts/postSelector";
 
+import Spinner from "../../shared/Spinner/Spinner";
 import Post from "../Post/Post";
 
 const PostList = ({ posts, loadingPosts }) => {
@@ -18,9 +24,14 @@ const PostList = ({ posts, loadingPosts }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  posts: state.post.posts,
-  loadingPosts: state.post.loadingPosts,
+PostList.propTypes = {
+  posts: PropTypes.array.isRequired,
+  loadingPosts: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  posts: selectPosts,
+  loadingPosts: selectLoadingPosts,
 });
 
 export default connect(mapStateToProps)(PostList);

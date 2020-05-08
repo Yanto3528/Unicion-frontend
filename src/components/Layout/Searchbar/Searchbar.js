@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { searchUsers } from "../../../redux/users/userActions";
@@ -11,15 +12,16 @@ import {
 } from "./SearchbarStyle";
 import { SearchIcon } from "../../../styles/shared/Icons";
 
-const Searchbar = ({ searchUsers, history }) => {
+const Searchbar = ({ history }) => {
   const [query, setQuery] = useState("");
+  const [placeholderText, setPlaceholderText] = useState("Search people...");
 
   const onChange = (event) => setQuery(event.target.value);
 
   const onSubmit = async (event) => {
     event.preventDefault();
     if (query === "")
-      return console.log("Please enter something to search for.");
+      return setPlaceholderText("Please enter something to search for.");
     history.push(`/dashboard/search/${query}`);
   };
 
@@ -28,7 +30,7 @@ const Searchbar = ({ searchUsers, history }) => {
       <SearchForm onSubmit={onSubmit}>
         <SearchInput
           type="text"
-          placeholder="Search people..."
+          placeholder={placeholderText}
           onChange={onChange}
           value={query}
         />
@@ -38,6 +40,10 @@ const Searchbar = ({ searchUsers, history }) => {
       </SearchForm>
     </SearchbarContainer>
   );
+};
+
+Searchbar.propTypes = {
+  history: PropTypes.object.isRequired,
 };
 
 export default withRouter(connect(null, { searchUsers })(Searchbar));

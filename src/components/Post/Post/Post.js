@@ -1,7 +1,11 @@
 import React, { useState, Fragment } from "react";
+import PropTypes from "prop-types";
 import moment from "moment";
 import { connect } from "react-redux";
 import { deletePost } from "../../../redux/posts/postActions";
+
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../../redux/users/userSelector";
 
 // Components
 import CommentList from "../../Comment/CommentList/CommentList";
@@ -30,8 +34,8 @@ import Name from "../../../styles/shared/Name";
 const Post = ({
   post,
   currentUser,
-  toggleDropdown,
   showDropdown,
+  toggleDropdown,
   deletePost,
 }) => {
   const [showComments, setShowComments] = useState(false);
@@ -90,8 +94,16 @@ const Post = ({
   );
 };
 
-const mapStateToProp = (state) => ({
-  currentUser: state.user.currentUser,
+Post.propTypes = {
+  post: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  showDropdown: PropTypes.bool.isRequired,
+  toggleDropdown: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
+};
+
+const mapStateToProp = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 export default withDropdown(connect(mapStateToProp, { deletePost })(Post));

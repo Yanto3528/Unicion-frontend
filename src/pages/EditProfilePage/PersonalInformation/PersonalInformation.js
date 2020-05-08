@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { updateProfile, clearErrors } from "../../../redux/users/userActions";
 import { setAlert } from "../../../redux/alerts/alertActions";
+
+import { createStructuredSelector } from "reselect";
+import {
+  selectCurrentUser,
+  selectUserError,
+  selectUserMessage,
+  selectLoading,
+} from "../../../redux/users/userSelector";
 
 import Title from "../../../components/shared/Title/Title";
 import Avatar from "../../../components/shared/Avatar/Avatar";
@@ -32,12 +41,10 @@ import getCountryName from "../../../utils/getCountryName";
 import "react-datepicker/dist/react-datepicker.css";
 
 const PersonalInformation = ({
-  user: {
-    currentUser: { profile },
-    error,
-    loading,
-    msg,
-  },
+  currentUser: { profile },
+  error,
+  loading,
+  msg,
   updateProfile,
   setAlert,
   clearErrors,
@@ -267,8 +274,21 @@ const PersonalInformation = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.user,
+PersonalInformation.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+  error: PropTypes.string,
+  msg: PropTypes.string,
+  loading: PropTypes.bool.isRequired,
+  updateProfile: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  error: selectUserError,
+  msg: selectUserMessage,
+  loading: selectLoading,
 });
 
 export default connect(mapStateToProps, {

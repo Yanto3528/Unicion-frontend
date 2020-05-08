@@ -1,6 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { sendRequest, deleteFriend } from "../../../redux/users/userActions";
+
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../../redux/users/userSelector";
 
 import Button from "../../shared/Button/Button";
 
@@ -49,8 +53,15 @@ const ProfileFriend = ({ user, currentUser, sendRequest, deleteFriend }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+ProfileFriend.propTypes = {
+  user: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  sendRequest: PropTypes.func.isRequired,
+  deleteFriend: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, { sendRequest, deleteFriend })(

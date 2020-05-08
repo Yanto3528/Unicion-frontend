@@ -1,7 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import PostInputModal from "../../PostInput/PostInputModal/PostInputModal";
-
 import withModal from "../../../shared/HOC/withModal/withModal";
 
 import Dropdown, { DropdownOption } from "../../../../styles/shared/Dropdown";
@@ -32,6 +32,13 @@ const PostDropdown = ({
       </Dropdown>
     )
   );
+};
+
+PostInputModal.propTypes = {
+  toggleModal: PropTypes.func.isRequired,
+  toggleDropdown: PropTypes.func.isRequired,
+  showDropdown: PropTypes.bool.isRequired,
+  deletePost: PropTypes.func.isRequired,
 };
 
 export default withModal(PostDropdown, PostInputModal);

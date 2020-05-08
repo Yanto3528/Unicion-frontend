@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../../../redux/users/userActions";
@@ -20,6 +21,10 @@ const NavbarProfileDropdown = ({ logout }) => {
       </DropdownOption>
     </Dropdown>
   );
+};
+
+NavbarProfileDropdown.propTypes = {
+  logout: PropTypes.func.isRequired,
 };
 
 export default connect(null, { logout })(NavbarProfileDropdown);

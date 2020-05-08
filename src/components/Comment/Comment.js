@@ -1,6 +1,12 @@
 import React, { useState, Fragment } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { likeUnlikeComment } from "../../redux/comments/commentActions";
+
+import { createStructuredSelector } from "reselect";
+import { selectPosts } from "../../redux/posts/postSelector";
+import { selectCurrentUser } from "../../redux/users/userSelector";
+
 import moment from "moment";
 
 import withDropdown from "../shared/HOC/withDropdown/withDropdown";
@@ -83,9 +89,18 @@ const Comment = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  posts: state.post.posts,
-  currentUser: state.user.currentUser,
+Comment.propTypes = {
+  comment: PropTypes.object.isRequired,
+  posts: PropTypes.array.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  showDropdown: PropTypes.bool.isRequired,
+  toggleDropdown: PropTypes.func.isRequired,
+  likeUnlikeComment: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  posts: selectPosts,
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, { likeUnlikeComment })(

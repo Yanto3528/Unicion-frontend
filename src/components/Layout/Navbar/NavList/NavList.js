@@ -1,5 +1,13 @@
 import React, { useState, Fragment } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
+import { createStructuredSelector } from "reselect";
+import {
+  selectCurrentUser,
+  selectFriendRequests,
+} from "../../../../redux/users/userSelector";
+import { selectNotifications } from "../../../../redux/notifications/notificationSelector";
 
 import Searchbar from "../../Searchbar/Searchbar";
 import NavbarProfileDropdown from "../NavbarProfileDropdown/NavbarProfileDropdown";
@@ -64,10 +72,16 @@ const NavList = ({ currentUser, notifications, friendRequests }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-  friendRequests: state.user.friendRequests,
-  notifications: state.notification.notifications,
+NavList.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+  friendRequests: PropTypes.array.isRequired,
+  notifications: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  friendRequests: selectFriendRequests,
+  notifications: selectNotifications,
 });
 
 export default connect(mapStateToProps)(NavList);

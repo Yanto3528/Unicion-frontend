@@ -1,10 +1,13 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
+import PropTypes from "prop-types";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUserById } from "../../redux/users/userActions";
 
-import Spinner from "../../components/shared/Spinner/Spinner";
+import { createStructuredSelector } from "reselect";
+import { selectUser, selectCurrentUser } from "../../redux/users/userSelector";
 
+import Spinner from "../../components/shared/Spinner/Spinner";
 import ProfileHeader from "../../components/Profile/ProfileHeader/ProfileHeader";
 import ProfileNav from "../../components/Profile/ProfileNav/ProfileNav";
 
@@ -59,9 +62,16 @@ const ProfilePage = ({ match, user, currentUser, getUserById }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.user.user,
-  currentUser: state.user.currentUser,
+ProfilePage.propTypes = {
+  match: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  getUserById: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  user: selectUser,
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, { getUserById })(ProfilePage);

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteNotification } from "../../redux/notifications/notificationActions";
 
@@ -31,6 +32,11 @@ const Notification = ({ notification, deleteNotification }) => {
       <CloseCircleIcon onClick={onDeleteNotification} />
     </NotificationItem>
   );
+};
+
+Notification.propTypes = {
+  notification: PropTypes.object.isRequired,
+  deleteNotification: PropTypes.func.isRequired,
 };
 
 export default connect(null, { deleteNotification })(Notification);

@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { updateProfile, clearErrors } from "../../../redux/users/userActions";
 import { setAlert } from "../../../redux/alerts/alertActions";
 
+import { createStructuredSelector } from "reselect";
+import {
+  selectUserError,
+  selectUserMessage,
+  selectLoading,
+  selectCurrentUser,
+} from "../../../redux/users/userSelector";
 import Title from "../../../components/shared/Title/Title";
 import Button from "../../../components/shared/Button/Button";
 import Alert from "../../../components/Alert/Alert";
@@ -12,12 +20,10 @@ import { InputContainer, Input } from "../../../styles/shared/Input";
 import Form from "../../../styles/shared/Form";
 
 const ContactInformation = ({
-  user: {
-    error,
-    msg,
-    loading,
-    currentUser: { profile },
-  },
+  error,
+  msg,
+  loading,
+  currentUser: { profile },
   updateProfile,
   setAlert,
   clearErrors,
@@ -77,8 +83,21 @@ const ContactInformation = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.user,
+ContactInformation.propTypes = {
+  error: PropTypes.string,
+  msg: PropTypes.string,
+  loading: PropTypes.bool.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  updateProfile: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  error: selectUserError,
+  msg: selectUserMessage,
+  loading: selectLoading,
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, {

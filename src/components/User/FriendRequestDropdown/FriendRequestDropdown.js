@@ -1,5 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
+import { createStructuredSelector } from "reselect";
+import { selectFriendRequests } from "../../../redux/users/userSelector";
 
 import FriendRequest from "../FriendRequest/FriendRequest";
 
@@ -26,8 +30,12 @@ const FriendRequestDropdown = ({ friendRequests }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  friendRequests: state.user.friendRequests,
+FriendRequestDropdown.propTypes = {
+  friendRequests: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  friendRequests: selectFriendRequests,
 });
 
 export default connect(mapStateToProps)(FriendRequestDropdown);

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import ProfileFriend from "../ProfileFriend";
 
@@ -12,6 +13,10 @@ const ProfileFriendList = ({ users }) => {
       ))}
     </ProfileFriendListContainer>
   );
+};
+
+ProfileFriendList.propTypes = {
+  users: PropTypes.array.isRequired,
 };
 
 export default ProfileFriendList;

@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { login, clearErrors } from "../../../redux/users/userActions";
 import { setAlert } from "../../../redux/alerts/alertActions";
+
+import { createStructuredSelector } from "reselect";
+import {
+  selectIsAuthenticated,
+  selectLoading,
+  selectUserError,
+} from "../../../redux/users/userSelector";
 
 import { AuthFormContainer } from "../../../styles/shared/AuthForm";
 import { Input, InputContainer } from "../../../styles/shared/Input";
 import Button from "../../../components/shared/Button/Button";
 
 const LoginForm = ({
-  login,
-  user: { isAuthenticated, loading, error },
+  isAuthenticated,
+  loading,
+  error,
   history,
+  login,
   setAlert,
   clearErrors,
 }) => {
@@ -80,8 +90,20 @@ const LoginForm = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.user,
+LoginForm.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  history: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  isAuthenticated: selectIsAuthenticated,
+  loading: selectLoading,
+  error: selectUserError,
 });
 
 export default withRouter(

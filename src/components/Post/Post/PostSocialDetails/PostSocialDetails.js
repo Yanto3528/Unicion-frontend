@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { likePost } from "../../../../redux/posts/postActions";
 
@@ -38,6 +39,14 @@ const PostSocialDetails = ({ id, likes, comments, likePost, showComments }) => {
       </PostSocialActionContainer>
     </Fragment>
   );
+};
+
+PostSocialDetails.propTypes = {
+  id: PropTypes.string.isRequired,
+  likes: PropTypes.array.isRequired,
+  comments: PropTypes.array.isRequired,
+  likePost: PropTypes.func.isRequired,
+  showComments: PropTypes.func.isRequired,
 };
 
 export default connect(null, { likePost })(PostSocialDetails);

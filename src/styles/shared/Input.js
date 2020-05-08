@@ -33,7 +33,7 @@ export const Select = styled.select`
 `;
 
 export const Option = styled.option`
-  padding: 1rem;
+  color: ${({ theme }) => theme.heading};
 `;
 
 export const InputContainer = styled.div`

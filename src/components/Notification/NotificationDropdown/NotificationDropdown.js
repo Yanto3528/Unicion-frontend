@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
   readNotifications,
   deleteNotifications,
 } from "../../../redux/notifications/notificationActions";
+
+import { createStructuredSelector } from "reselect";
+import { selectNotifications } from "../../../redux/notifications/notificationSelector";
 
 import Notification from "../Notification";
 
@@ -49,8 +53,14 @@ const NotificationDropdown = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  notifications: state.notification.notifications,
+NotificationDropdown.propTypes = {
+  notifications: PropTypes.array.isRequired,
+  readNotifications: PropTypes.func.isRequired,
+  deleteNotifications: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  notifications: selectNotifications,
 });
 
 export default connect(mapStateToProps, {

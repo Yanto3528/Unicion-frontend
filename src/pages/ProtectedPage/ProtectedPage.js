@@ -1,4 +1,5 @@
 import React, { useEffect, lazy, Suspense } from "react";
+import PropTypes from "prop-types";
 import { Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -10,6 +11,9 @@ import {
   addFriendRequest,
 } from "../../redux/users/userActions";
 import io from "socket.io-client";
+
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../redux/users/userSelector";
 
 import Spinner from "../../components/shared/Spinner/Spinner";
 
@@ -66,8 +70,16 @@ const ProtectedPage = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+ProtectedPage.propTypes = {
+  currentUser: PropTypes.object,
+  addNotification: PropTypes.func.isRequired,
+  addFriendRequest: PropTypes.func.isRequired,
+  getFriendRequests: PropTypes.func.isRequired,
+  getNotifications: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, {

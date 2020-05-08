@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addComment } from "../../../redux/comments/commentActions";
+
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../../redux/users/userSelector";
 
 import Button from "../../shared/Button/Button";
 
@@ -42,8 +46,14 @@ const AddComment = ({ currentUser, post, addComment }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+AddComment.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired,
+  addComment: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, { addComment })(AddComment);

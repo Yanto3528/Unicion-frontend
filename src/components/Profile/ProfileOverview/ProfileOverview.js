@@ -1,7 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
-
 import moment from "moment";
+
+import { createStructuredSelector } from "reselect";
+import { selectUser } from "../../../redux/users/userSelector";
 
 import Title from "../../shared/Title/Title";
 
@@ -38,8 +41,12 @@ const ProfileOverview = ({ user }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.user.user,
+ProfileOverview.propTypes = {
+  user: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  user: selectUser,
 });
 
 export default connect(mapStateToProps)(ProfileOverview);

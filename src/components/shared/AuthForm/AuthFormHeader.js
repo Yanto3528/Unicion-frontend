@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Title from "../Title/Title";
 
@@ -14,6 +15,11 @@ const AuthFormHeader = ({ title, subtitle }) => {
       <Body center>{subtitle}</Body>
     </AuthFormHeaderContainer>
   );
+};
+
+AuthFormHeader.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
 };
 
 export default AuthFormHeader;

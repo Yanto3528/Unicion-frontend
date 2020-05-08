@@ -1,6 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
+import { createStructuredSelector } from "reselect";
+import { selectIsAuthenticated } from "../../../redux/users/userSelector";
 
 import NavList from "./NavList/NavList";
 
@@ -32,8 +36,12 @@ const Navbar = ({ isAuthenticated }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.user.isAuthenticated,
+Navbar.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  isAuthenticated: selectIsAuthenticated,
 });
 
-export default connect(mapStateToProps)(React.memo(Navbar));
+export default connect(mapStateToProps)(Navbar);

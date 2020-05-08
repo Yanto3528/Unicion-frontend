@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createPost, updatePost } from "../../../../redux/posts/postActions";
+
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../../../redux/users/userSelector";
 
 import Title from "../../../shared/Title/Title";
 import InputFile from "../../../shared/InputFile/InputFile";
@@ -17,12 +21,12 @@ import UploadImagePlaceholder from "../../../../styles/shared/UploadImagePlaceho
 import placeholder from "../../../../assets/upload-image-placeholder.png";
 
 const PostInputModal = ({
+  post,
+  currentUser,
+  isEdit,
   toggleModal,
   createPost,
   updatePost,
-  post,
-  isEdit,
-  currentUser,
 }) => {
   const [text, setText] = useState("");
   const [imageFile, setImageFile] = useState(null);
@@ -97,8 +101,17 @@ const PostInputModal = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+PostInputModal.propTypes = {
+  post: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  isEdit: PropTypes.bool,
+  toggleModal: PropTypes.func,
+  createPost: PropTypes.func.isRequired,
+  updatePost: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, { createPost, updatePost })(

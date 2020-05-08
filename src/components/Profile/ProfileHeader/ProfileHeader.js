@@ -1,6 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { uploadCoverImage } from "../../../redux/users/userActions";
+
+import { createStructuredSelector } from "reselect";
+import {
+  selectCurrentUser,
+  selectUser,
+} from "../../../redux/users/userSelector";
 
 import {
   ProfileHeaderContainer,
@@ -46,9 +53,15 @@ const ProfileHeader = ({ user, currentUser, uploadCoverImage }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.user.user,
-  currentUser: state.user.currentUser,
+ProfileHeader.propTypes = {
+  user: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  uploadCoverImage: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  user: selectUser,
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, { uploadCoverImage })(ProfileHeader);

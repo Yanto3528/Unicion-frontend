@@ -1,7 +1,11 @@
 import React, { useEffect, lazy, Suspense } from "react";
+import PropTypes from "prop-types";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { getPosts } from "../../redux/posts/postActions";
+
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../redux/users/userSelector";
 
 import LeftSidebar from "../../components/Layout/LeftSidebar/LeftSidebar";
 import Spinner from "../../components/shared/Spinner/Spinner";
@@ -17,7 +21,7 @@ const FriendRequestList = lazy(() =>
   import("../../components/User/FriendRequestList/FriendRequestList")
 );
 
-const Dashboard = ({ currentUser, users, getPosts, match }) => {
+const Dashboard = ({ currentUser, match, getPosts }) => {
   useEffect(() => {
     getPosts();
     //eslint-disable-next-line
@@ -66,9 +70,14 @@ const Dashboard = ({ currentUser, users, getPosts, match }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-  users: state.user.users,
+Dashboard.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  getPosts: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, { getPosts })(Dashboard);

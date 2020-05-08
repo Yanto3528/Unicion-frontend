@@ -1,6 +1,13 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { searchUsers, getUserFriends } from "../../../redux/users/userActions";
+
+import { createStructuredSelector } from "reselect";
+import {
+  selectUsers,
+  selectCurrentUser,
+} from "../../../redux/users/userSelector";
 
 import UserCard from "../UserCard/UserCard";
 import Spinner from "../../shared/Spinner/Spinner";
@@ -50,9 +57,19 @@ const UserList = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-  users: state.user.users,
+UserList.propTypes = {
+  users: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  error: PropTypes.string,
+  title: PropTypes.string,
+  match: PropTypes.object.isRequired,
+  searchUsers: PropTypes.func.isRequired,
+  getUserFriends: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  users: selectUsers,
 });
 
 export default connect(mapStateToProps, { searchUsers, getUserFriends })(

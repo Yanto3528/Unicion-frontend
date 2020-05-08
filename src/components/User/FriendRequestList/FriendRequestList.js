@@ -1,6 +1,13 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getFriendRequests } from "../../../redux/users/userActions";
+
+import { createStructuredSelector } from "reselect";
+import {
+  selectCurrentUser,
+  selectFriendRequests,
+} from "../../../redux/users/userSelector";
 
 import FriendRequest from "../FriendRequest/FriendRequest";
 import Title from "../../shared/Title/Title";
@@ -36,9 +43,15 @@ const FriendRequestList = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  friendRequests: state.user.friendRequests,
-  currentUser: state.user.currentUser,
+FriendRequestList.propTypes = {
+  friendRequests: PropTypes.array.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  getFriendRequests: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  friendRequests: selectFriendRequests,
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, { getFriendRequests })(

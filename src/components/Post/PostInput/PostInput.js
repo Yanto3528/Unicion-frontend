@@ -1,5 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../../redux/users/userSelector";
 
 import withModal from "../../shared/HOC/withModal/withModal";
 import PostInputModal from "./PostInputModal/PostInputModal";
@@ -8,7 +12,7 @@ import { PostInputForm, PostInputGroup, PostInputText } from "./PostInputStyle";
 import Card from "../../../styles/shared/Card";
 import Avatar from "../../../styles/shared/Avatar";
 
-const PostInput = ({ toggleModal, currentUser }) => {
+const PostInput = ({ currentUser, toggleModal }) => {
   return (
     <Card pd="0" mb="2rem">
       <PostInputForm>
@@ -25,8 +29,13 @@ const PostInput = ({ toggleModal, currentUser }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+PostInput.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+  toggleModal: PropTypes.func,
+};
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps)(withModal(PostInput, PostInputModal));

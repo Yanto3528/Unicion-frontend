@@ -1,6 +1,10 @@
 import React, { useState, lazy, Suspense } from "react";
+import PropTypes from "prop-types";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
+
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../redux/users/userSelector";
 
 import ProfileNav from "../../components/Profile/ProfileNav/ProfileNav";
 import Spinner from "../../components/shared/Spinner/Spinner";
@@ -61,8 +65,13 @@ const EditProfilePage = ({ currentUser, match }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+EditProfilePage.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps)(EditProfilePage);

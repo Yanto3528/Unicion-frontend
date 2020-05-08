@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { updateComment } from "../../../redux/comments/commentActions";
+
+import { createStructuredSelector } from "reselect";
+import { selectPosts } from "../../../redux/posts/postSelector";
 
 import { CommentEditForm, CommentEditInput } from "./CommentEditStyle";
 import Button from "../../shared/Button/Button";
@@ -57,8 +61,15 @@ const CommentEdit = ({ comment, posts, toggleEdit, updateComment }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  posts: state.post.posts,
+CommentEdit.propTypes = {
+  comment: PropTypes.object.isRequired,
+  posts: PropTypes.array.isRequired,
+  toggleEdit: PropTypes.func.isRequired,
+  updateComment: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  posts: selectPosts,
 });
 
 export default connect(mapStateToProps, { updateComment })(CommentEdit);

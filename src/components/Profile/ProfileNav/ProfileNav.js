@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { ProfileNavContainer, ProfileNavItemLink } from "./ProfileNavStyle";
 
@@ -12,6 +13,10 @@ const ProfileNav = ({ links }) => {
       ))}
     </ProfileNavContainer>
   );
+};
+
+ProfileNav.propTypes = {
+  links: PropTypes.array.isRequired,
 };
 
 export default ProfileNav;
