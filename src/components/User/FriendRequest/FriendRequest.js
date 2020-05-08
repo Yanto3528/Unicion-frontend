@@ -27,9 +27,7 @@ const FriendRequest = ({ user, deleteRequest, acceptRequest }) => {
       <FriendRequestChildContainer>
         <Avatar src={user.profile.avatar} />
         <FriendRequestDetails>
-          <Name
-            to={`/profile/${user._id}/timeline`}
-          >{`${user.profile.firstName} ${user.profile.lastName}`}</Name>
+          <Name to={`/profile/${user._id}/timeline`}>{user.profile.name}</Name>
           <Body>{`${user.friends.length} Friends`}</Body>
         </FriendRequestDetails>
       </FriendRequestChildContainer>

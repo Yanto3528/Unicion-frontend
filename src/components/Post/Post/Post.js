@@ -53,9 +53,9 @@ const Post = ({
         <Avatar src={profile.avatar} />
         <PostTitle>
           <PostNameContainer>
-            <Name
-              to={`/profile/${post.postedBy._id}/timeline`}
-            >{`${profile.firstName} ${profile.lastName}`}</Name>
+            <Name to={`/profile/${post.postedBy._id}/timeline`}>
+              {profile.name}
+            </Name>
             {isPostedByCurrentUser && (
               <ChevronDownIcon onClick={toggleDropdown} />
             )}

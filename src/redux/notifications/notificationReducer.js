@@ -8,6 +8,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case notificationTypes.GET_NOTIFICATIONS_SUCCESS:
+    case notificationTypes.DELETE_NOTIFICATIONS_SUCCESS:
       return {
         ...state,
         notifications: action.payload,
@@ -27,6 +28,14 @@ export default (state = initialState, action) => {
         })),
         error: null,
       };
+    case notificationTypes.DELETE_NOTIFICATION_SUCCESS:
+      return {
+        ...state,
+        notifications: state.notifications.filter(
+          (notification) => notification._id !== action.payload
+        ),
+        error: null,
+      };
     case notificationTypes.GET_NOTIFICATIONS_FAIL:
       return {
         ...state,
@@ -34,6 +43,8 @@ export default (state = initialState, action) => {
         error: action.payload,
       };
     case notificationTypes.READ_NOTIFICATIONS_FAIL:
+    case notificationTypes.DELETE_NOTIFICATION_FAIL:
+    case notificationTypes.DELETE_NOTIFICATIONS_FAIL:
       return {
         ...state,
         error: action.payload,

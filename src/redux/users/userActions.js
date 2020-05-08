@@ -179,6 +179,14 @@ export const uploadCoverImage = (id, image) => async (dispatch) => {
   }
 };
 
+// append friend request to existing friend requests array
+export const addFriendRequest = (friendRequest) => (dispatch) => {
+  dispatch({
+    type: userTypes.ADD_FRIEND_REQUEST,
+    payload: friendRequest,
+  });
+};
+
 // Send friend request
 export const sendRequest = (id) => async (dispatch) => {
   dispatch(setLoading());
@@ -204,7 +212,7 @@ export const acceptRequest = (id) => async (dispatch) => {
     const res = await axios.put(`/api/users/${id}/accept-friend-request`);
     dispatch({
       type: userTypes.ACCEPT_FRIEND_REQUEST_SUCCESS,
-      payload: res.data.data,
+      payload: { res: res.data.data, id },
     });
   } catch (error) {
     console.log(error);
@@ -222,7 +230,7 @@ export const deleteRequest = (id) => async (dispatch) => {
     const res = await axios.delete(`/api/users/${id}/delete-friend-request`);
     dispatch({
       type: userTypes.DELETE_FRIEND_REQUEST_SUCCESS,
-      payload: res.data.data,
+      payload: { res: res.data.data, id },
     });
   } catch (error) {
     console.log(error);

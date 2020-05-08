@@ -42,9 +42,7 @@ const UserCard = ({ user, currentUser, sendRequest, deleteFriend }) => {
       </UserCardCoverPhoto>
       <UserCardDetailsContainer>
         <UserCardDetails>
-          <Name
-            to={`/profile/${user._id}/timeline`}
-          >{`${user.profile.firstName} ${user.profile.lastName}`}</Name>
+          <Name to={`/profile/${user._id}/timeline`}>{user.profile.name}</Name>
           {user.profile.location && <Body>{user.profile.location.city}</Body>}
         </UserCardDetails>
         {button}

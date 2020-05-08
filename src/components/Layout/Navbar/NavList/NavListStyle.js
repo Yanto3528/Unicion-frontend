@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import Dropdown from "../../../../styles/shared/Dropdown";
 
 const notifIcon = css`
@@ -13,6 +13,17 @@ const notifIcon = css`
     top: 0;
     right: 0;
     transform: translate(75%, -75%);
+  }
+`;
+
+const slideIn = keyframes`
+  from {
+    transform: translate(25%, 90%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(25%, 100%);
+    opacity: 1;
   }
 `;
 
@@ -39,7 +50,9 @@ export const NavItem = styled.div`
     margin-right: 1rem;
   }
   ${Dropdown} {
-    bottom: -2rem;
+    bottom: -3rem;
+    transform: translate(25%, 100%);
+    animation: ${slideIn} 0.5s;
   }
   ${({ hasNotif }) => hasNotif && notifIcon}
 `;

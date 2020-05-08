@@ -43,8 +43,8 @@ const PersonalInformation = ({
   clearErrors,
 }) => {
   const [formData, setFormData] = useState({
-    firstName: profile.firstName,
-    lastName: profile.lastName,
+    firstName: profile.name.split(" ")[0],
+    lastName: profile.name.split(" ")[1],
     country: getCountryName(profile.location.country),
     state: profile.location.state,
     address: profile.address,

@@ -8,20 +8,24 @@ import Spinner from "../../shared/Spinner/Spinner";
 
 import Card from "../../../styles/shared/Card";
 
-const FriendRequestList = ({ users, currentUser, getFriendRequests }) => {
+const FriendRequestList = ({
+  friendRequests,
+  currentUser,
+  getFriendRequests,
+}) => {
   useEffect(() => {
     getFriendRequests();
     //eslint-disable-next-line
   }, [currentUser]);
 
-  if (!users) return <Spinner />;
+  if (!friendRequests) return <Spinner />;
 
   return (
     <Card>
       <Title>Friend Requests</Title>
-      {users.length > 0 ? (
+      {friendRequests.length > 0 ? (
         <div>
-          {users.map((user) => (
+          {friendRequests.map((user) => (
             <FriendRequest key={user._id} user={user} />
           ))}
         </div>
@@ -33,7 +37,7 @@ const FriendRequestList = ({ users, currentUser, getFriendRequests }) => {
 };
 
 const mapStateToProps = (state) => ({
-  users: state.user.users,
+  friendRequests: state.user.friendRequests,
   currentUser: state.user.currentUser,
 });
 

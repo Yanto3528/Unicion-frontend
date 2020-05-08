@@ -5,6 +5,7 @@ const initialState = {
   currentUser: null,
   user: null,
   users: null,
+  friendRequests: [],
   isAuthenticated: false,
   loading: true,
   error: null,
@@ -21,10 +22,16 @@ export default (state = initialState, action) => {
         error: null,
       };
     case userTypes.GET_USERS_FRIENDS_SUCCESS:
-    case userTypes.GET_FRIEND_REQUEST_SUCCESS:
       return {
         ...state,
         users: action.payload,
+        loading: false,
+        error: null,
+      };
+    case userTypes.GET_FRIEND_REQUEST_SUCCESS:
+      return {
+        ...state,
+        friendRequests: action.payload,
         loading: false,
         error: null,
       };
@@ -65,6 +72,12 @@ export default (state = initialState, action) => {
         loading: false,
         error: null,
       };
+    case userTypes.ADD_FRIEND_REQUEST:
+      return {
+        ...state,
+        friendRequests: [action.payload, ...state.friendRequests],
+        error: null,
+      };
     case userTypes.SEND_FRIEND_REQUEST_SUCCESS:
       return {
         ...state,
@@ -76,6 +89,15 @@ export default (state = initialState, action) => {
       };
     case userTypes.ACCEPT_FRIEND_REQUEST_SUCCESS:
     case userTypes.DELETE_FRIEND_REQUEST_SUCCESS:
+      return {
+        ...state,
+        currentUser: action.payload.res,
+        friendRequests: state.friendRequests.filter(
+          (user) => user._id !== action.payload.id
+        ),
+        loading: false,
+        error: null,
+      };
     case userTypes.DELETE_FRIEND_SUCCESS:
       return {
         ...state,

@@ -40,9 +40,7 @@ const ProfileFriend = ({ user, currentUser, sendRequest, deleteFriend }) => {
       <ProfileFriendDetail>
         <ProfileFriendAvatar src={user.profile.avatar} />
         <div>
-          <Name
-            to={`/profile/${user._id}/timeline`}
-          >{`${user.profile.firstName} ${user.profile.lastName}`}</Name>
+          <Name to={`/profile/${user._id}/timeline`}>{user.profile.name}</Name>
           <Body>{user.friends.length} friends</Body>
         </div>
       </ProfileFriendDetail>

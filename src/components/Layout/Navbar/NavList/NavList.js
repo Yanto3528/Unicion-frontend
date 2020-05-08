@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 
 import Searchbar from "../../Searchbar/Searchbar";
 import NavbarProfileDropdown from "../NavbarProfileDropdown/NavbarProfileDropdown";
-import NotificationDropdown from "../../../NotificationDropdown/NotificationDropdown";
+import NotificationDropdown from "../../../Notification/NotificationDropdown/NotificationDropdown";
+import FriendRequestDropdown from "../../../User/FriendRequestDropdown/FriendRequestDropdown";
 
 import { NavListContainer, NavListItem, NavItem } from "./NavListStyle";
 import Avatar from "../../../shared/Avatar/Avatar";
@@ -13,7 +14,7 @@ import {
   ChevronDownIcon,
 } from "../../../../styles/shared/Icons";
 
-const NavList = ({ currentUser, notifications }) => {
+const NavList = ({ currentUser, notifications, friendRequests }) => {
   const [showNotificationDropdown, setShowNotificationDropdown] = useState(
     false
   );
@@ -24,6 +25,7 @@ const NavList = ({ currentUser, notifications }) => {
   const hasNotif = notifications.some(
     (notification) => notification.read === false
   );
+  const hasFriendRequest = friendRequests.length > 0;
 
   const onToggleNotification = () =>
     setShowNotificationDropdown((prevState) => !prevState);
@@ -38,8 +40,9 @@ const NavList = ({ currentUser, notifications }) => {
         <Searchbar />
         <NavListContainer>
           <NavListItem>
-            <NavItem hasNotif={hasNotif}>
+            <NavItem hasNotif={hasFriendRequest}>
               <PeopleIcon onClick={onToggleFriendRequest} />
+              {showFriendRequestDropdown && <FriendRequestDropdown />}
             </NavItem>
           </NavListItem>
           <NavListItem>
@@ -63,6 +66,7 @@ const NavList = ({ currentUser, notifications }) => {
 
 const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
+  friendRequests: state.user.friendRequests,
   notifications: state.notification.notifications,
 });
 

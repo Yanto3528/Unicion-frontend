@@ -48,9 +48,9 @@ const Comment = ({
       <Avatar src={profile.avatar} />
       <CommentDetails>
         <CommentHeaderContainer>
-          <Name
-            to={`/profile/${comment.postedBy._id}/timeline`}
-          >{`${profile.firstName} ${profile.lastName}`}</Name>
+          <Name to={`/profile/${comment.postedBy._id}/timeline`}>
+            {profile.name}
+          </Name>
           {comment.postedBy._id === currentUser._id && (
             <ChevronDownIcon onClick={toggleDropdown} />
           )}
