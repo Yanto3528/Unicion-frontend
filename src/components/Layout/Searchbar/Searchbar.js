@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { searchUsers } from "../../../redux/users/userActions";
 
 import {
@@ -46,4 +47,7 @@ Searchbar.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default withRouter(connect(null, { searchUsers })(Searchbar));
+export default compose(
+  withRouter,
+  connect(null, { searchUsers })
+)(React.memo(Searchbar));

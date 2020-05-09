@@ -7,6 +7,7 @@ import { createStructuredSelector } from "reselect";
 import { selectIsAuthenticated } from "../../../redux/users/userSelector";
 
 import NavList from "./NavList/NavList";
+import Searchbar from "../Searchbar/Searchbar";
 
 import Container from "../../../styles/shared/Container";
 import {
@@ -28,6 +29,7 @@ const Navbar = ({ isAuthenticated }) => {
             <Link to={`${isAuthenticated ? "/dashboard/newsfeed" : "/"}`}>
               <Logo src={isAuthenticated ? logo : logoWhite} alt="Unicion" />
             </Link>
+            <Searchbar />
             {isAuthenticated && <NavList />}
           </NavContainer>
         </Container>

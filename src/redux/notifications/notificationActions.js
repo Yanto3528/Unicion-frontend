@@ -1,21 +1,19 @@
 import notificationTypes from "./notificationTypes";
 import axios from "axios";
 
+import { asyncRequest } from "../utils/asyncRequest";
+
 // Get notifications
-export const getNotifications = () => async (dispatch) => {
-  try {
-    const res = await axios.get("/api/notifications");
-    dispatch({
-      type: notificationTypes.GET_NOTIFICATIONS_SUCCESS,
-      payload: res.data.data,
-    });
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: notificationTypes.GET_NOTIFICATIONS_FAIL,
-      payload: error.response.data.error,
-    });
-  }
+export const getNotifications = () => (dispatch) => {
+  dispatch(
+    asyncRequest(
+      "GET",
+      "/api/notifications",
+      null,
+      notificationTypes.GET_NOTIFICATIONS_SUCCESS,
+      notificationTypes.GET_NOTIFICATIONS_FAIL
+    )
+  );
 };
 
 // Add notification
@@ -43,20 +41,16 @@ export const readNotifications = () => async (dispatch) => {
 };
 
 // delete all notifications
-export const deleteNotifications = () => async (dispatch) => {
-  try {
-    const res = await axios.delete(`/api/notifications/`);
-    dispatch({
-      type: notificationTypes.DELETE_NOTIFICATIONS_SUCCESS,
-      payload: res.data.data,
-    });
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: notificationTypes.DELETE_NOTIFICATIONS_FAIL,
-      payload: error.response.data.error,
-    });
-  }
+export const deleteNotifications = () => (dispatch) => {
+  dispatch(
+    asyncRequest(
+      "DELETE",
+      `/api/notifications`,
+      null,
+      notificationTypes.DELETE_NOTIFICATIONS_SUCCESS,
+      notificationTypes.DELETE_NOTIFICATIONS_FAIL
+    )
+  );
 };
 
 // delete single notification

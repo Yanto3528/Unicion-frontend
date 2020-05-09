@@ -40,10 +40,19 @@ export default (state = initialState, action) => {
         loadingPosts: false,
         error: null,
       };
-    case postTypes.POST_FAIL:
+    case postTypes.GET_POSTS_FAIL:
       return {
         ...state,
         posts: [],
+        loadingPosts: false,
+        error: action.payload,
+      };
+    case postTypes.ADD_POST_FAIL:
+    case postTypes.UPDATE_POST_FAIL:
+    case postTypes.LIKE_UNLIKE_POST_FAIL:
+    case postTypes.DELETE_POST_FAIL:
+      return {
+        ...state,
         loadingPosts: false,
         error: action.payload,
       };

@@ -1,22 +1,21 @@
 import commentTypes from "./commentTypes";
 import axios from "axios";
 
+import { asyncRequestWithId } from "../utils/asyncRequest";
+
 // Add comment
 export const addComment = (text, postId) => async (dispatch) => {
   dispatch(setLoadingComments(postId));
-  try {
-    const res = await axios.post(`/api/posts/${postId}/comments`, text);
-    dispatch({
-      type: commentTypes.ADD_COMMENT_SUCCESS,
-      payload: { res: res.data.data, id: postId },
-    });
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: commentTypes.ADD_COMMENT_FAIL,
-      payload: error.response.data.error,
-    });
-  }
+  dispatch(
+    asyncRequestWithId(
+      "POST",
+      `/api/posts/${postId}/comments`,
+      postId,
+      text,
+      commentTypes.ADD_COMMENT_SUCCESS,
+      commentTypes.ADD_COMMENT_FAIL
+    )
+  );
 };
 
 // Update Comment
