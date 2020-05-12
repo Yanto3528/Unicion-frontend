@@ -13,7 +13,7 @@ import {
 } from "./SearchbarStyle";
 import { SearchIcon } from "../../../styles/shared/Icons";
 
-const Searchbar = ({ history }) => {
+const Searchbar = ({ history, isDropdown }) => {
   const [query, setQuery] = useState("");
   const [placeholderText, setPlaceholderText] = useState("Search people...");
 
@@ -24,10 +24,11 @@ const Searchbar = ({ history }) => {
     if (query === "")
       return setPlaceholderText("Please enter something to search for.");
     history.push(`/dashboard/search/${query}`);
+    setQuery("");
   };
 
   return (
-    <SearchbarContainer>
+    <SearchbarContainer isDropdown={isDropdown}>
       <SearchForm onSubmit={onSubmit}>
         <SearchInput
           type="text"

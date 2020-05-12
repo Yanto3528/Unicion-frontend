@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { AvatarStyle } from "../../../shared/Avatar/AvatarStyle";
 
 export const NavListContainer = styled.ul`
   display: flex;
@@ -9,5 +10,17 @@ export const NavListContainer = styled.ul`
 export const NavListItem = styled.li`
   &:not(:last-child) {
     margin-right: 5rem;
+  }
+  @media (max-width: 800px) {
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+  @media (max-width: 600px) {
+    ${AvatarStyle} {
+      width: 3rem;
+      height: 3rem;
+      margin-right: 0;
+    }
   }
 `;

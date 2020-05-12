@@ -71,7 +71,7 @@ const PostInputModal = ({
   return (
     <PostInputModalContainer>
       <BackgroundOverlay>
-        <Card pd="0" mt="10rem" width="66.5rem">
+        <Card>
           <Title pd="2rem">Create Post</Title>
           <GreyButton onClick={toggleModal}>X</GreyButton>
           <PostInputForm modalPadding onSubmit={onSubmit}>

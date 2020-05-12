@@ -64,14 +64,13 @@ const Dashboard = ({ currentUser, match, getPosts }) => {
           </Suspense>
           <Redirect from={match.path} to={`${match.path}/newsfeed`} />
         </Switch>
-        <div>c</div>
       </DashboardContainer>
     </Container>
   );
 };
 
 Dashboard.propTypes = {
-  currentUser: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
   match: PropTypes.object.isRequired,
   getPosts: PropTypes.func.isRequired,
 };

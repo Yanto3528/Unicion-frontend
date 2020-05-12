@@ -10,7 +10,11 @@ import {
   PostSocialActionContainer,
   PostSocialAction,
 } from "./PostSocialDetailsStyle";
-import { HeartIcon } from "../../../../styles/shared/Icons";
+import {
+  HeartIcon,
+  HeartOutlineIcon,
+  CommentIcon,
+} from "../../../../styles/shared/Icons";
 
 const PostSocialDetails = ({ id, likes, comments, likePost, showComments }) => {
   const onLikePost = () => {
@@ -34,8 +38,13 @@ const PostSocialDetails = ({ id, likes, comments, likePost, showComments }) => {
         )}
       </PostSocialIconContainer>
       <PostSocialActionContainer>
-        <PostSocialAction onClick={onLikePost}>Like</PostSocialAction>
-        <PostSocialAction onClick={showComments}>Comment</PostSocialAction>
+        <PostSocialAction onClick={onLikePost}>
+          <HeartOutlineIcon />
+          Like
+        </PostSocialAction>
+        <PostSocialAction onClick={showComments}>
+          <CommentIcon /> Comment
+        </PostSocialAction>
       </PostSocialActionContainer>
     </Fragment>
   );
@@ -49,4 +58,4 @@ PostSocialDetails.propTypes = {
   showComments: PropTypes.func.isRequired,
 };
 
-export default connect(null, { likePost })(PostSocialDetails);
+export default connect(null, { likePost })(React.memo(PostSocialDetails));

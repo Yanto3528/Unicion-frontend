@@ -10,6 +10,9 @@ export const ProfileNavContainer = styled.div`
   overflow: hidden;
   background-color: white;
   box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.15);
+  @media (max-width: 750px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const activeClassName = "profile-nav-active";
@@ -30,5 +33,8 @@ export const ProfileNavItemLink = styled(NavLink).attrs({ activeClassName })`
   &.${activeClassName} {
     background-color: ${({ theme }) => theme.primary};
     color: white;
+  }
+  @media (max-width: 600px) {
+    font-size: 1.4rem;
   }
 `;

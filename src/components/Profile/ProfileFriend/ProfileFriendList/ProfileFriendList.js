@@ -8,15 +8,15 @@ import { ProfileFriendListContainer } from "./ProfileFriendListStyle";
 const ProfileFriendList = ({ users }) => {
   return (
     <ProfileFriendListContainer>
-      {users.map((user) => (
-        <ProfileFriend key={user._id} user={user} />
-      ))}
+      {users.length > 0
+        ? users.map((user) => <ProfileFriend key={user._id} user={user} />)
+        : "No friends yet"}
     </ProfileFriendListContainer>
   );
 };
 
 ProfileFriendList.propTypes = {
-  users: PropTypes.array.isRequired,
+  users: PropTypes.array,
 };
 
 export default ProfileFriendList;

@@ -28,7 +28,7 @@ const FriendRequestList = ({
   if (!friendRequests) return <Spinner />;
 
   return (
-    <Card>
+    <Card main>
       <Title>Friend Requests</Title>
       {friendRequests.length > 0 ? (
         <div>

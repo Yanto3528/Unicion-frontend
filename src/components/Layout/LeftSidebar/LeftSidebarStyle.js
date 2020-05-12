@@ -1,7 +1,27 @@
 import styled from "styled-components";
 
 export const LeftSidebarContainer = styled.ul`
-  padding: 2rem 0;
+  position: sticky;
+  top: 10rem;
+  margin-right: 8rem;
+  @media (max-width: 1000px) {
+    position: fixed;
+    top: 6rem;
+    left: 0;
+    height: 100vh;
+    z-index: 10;
+    background-color: white;
+    padding: 2rem;
+    transition: all 0.5s;
+    transform: ${({ isOpen }) => {
+      switch (isOpen) {
+        case true:
+          return "translateX(0)";
+        default:
+          return "translateX(-100%)";
+      }
+    }};
+  }
 `;
 
 export const SidebarNavList = styled.li`
@@ -23,5 +43,8 @@ export const SidebarNavList = styled.li`
     a {
       color: ${({ theme }) => theme.primary};
     }
+  }
+  @media (max-width: 575px) {
+    font-size: 1.2rem;
   }
 `;

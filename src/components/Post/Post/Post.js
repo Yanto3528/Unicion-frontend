@@ -36,6 +36,7 @@ const Post = ({
   currentUser,
   showDropdown,
   toggleDropdown,
+  closeDropdown,
   deletePost,
 }) => {
   const [showComments, setShowComments] = useState(false);
@@ -67,6 +68,7 @@ const Post = ({
               isEdit
               post={post}
               toggleDropdown={toggleDropdown}
+              closeDropdown={closeDropdown}
               showDropdown={showDropdown}
               deletePost={onDeletePost}
             />
@@ -106,4 +108,4 @@ const mapStateToProp = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default withDropdown(connect(mapStateToProp, { deletePost })(Post));
+export default connect(mapStateToProp, { deletePost })(withDropdown(Post));

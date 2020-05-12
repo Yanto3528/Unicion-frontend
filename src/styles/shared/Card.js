@@ -11,7 +11,17 @@ export default styled.div`
   margin-top: ${({ mt }) => mt};
   width: ${({ width }) => width};
   overflow: hidden;
-  ${({ noHidden }) => (noHidden) => css`
-    overflow: visible;
-  `}
+  ${({ noHidden }) =>
+    noHidden &&
+    css`
+      overflow: visible;
+    `}
+  ${({ main }) =>
+    main &&
+    css`
+      width: 50rem;
+      @media (max-width: 1000px) {
+        margin: 0 auto;
+      }
+    `}
 `;

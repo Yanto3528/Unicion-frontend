@@ -15,7 +15,7 @@ export const PostSocialIcon = styled.span`
 `;
 
 export const PostSocialIconText = styled.span`
-  font-size: 1.4rem;
+  font-size: inherit;
 `;
 
 export const PostSocialActionContainer = styled.div`
@@ -27,6 +27,9 @@ export const PostSocialActionContainer = styled.div`
 `;
 
 export const PostSocialAction = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 50%;
   padding: 1rem 0;
   background-color: white;
@@ -34,7 +37,6 @@ export const PostSocialAction = styled.div`
   text-align: center;
   cursor: pointer;
   &:hover {
-    background-color: ${({ theme }) => theme.primary};
-    color: white;
+    color: ${({ theme }) => theme.primary};
   }
 `;

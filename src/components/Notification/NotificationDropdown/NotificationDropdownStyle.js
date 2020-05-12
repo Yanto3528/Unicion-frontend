@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import Dropdown from "../../../styles/shared/Dropdown";
+
+export const NotificationDropdownContainer = styled(Dropdown)`
+  width: 35rem;
+`;
 
 export const NotificationAction = styled.button`
   border: none;

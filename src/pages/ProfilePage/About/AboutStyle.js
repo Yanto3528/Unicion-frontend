@@ -19,4 +19,5 @@ export const AboutGroupText = styled.p`
 export const AboutGroupValue = styled.p`
   color: ${({ theme }) => theme.text};
   text-transform: ${({ noCap }) => (noCap ? "none" : "capitalize")};
+  flex: 1;
 `;

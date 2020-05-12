@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteComment } from "../../../redux/comments/commentActions";
 
 import { createStructuredSelector } from "reselect";
 import { selectPosts } from "../../../redux/posts/postSelector";
+
+import useClickOutside from "../../../CustomHook/UseClickOutside";
 
 import Dropdown, { DropdownOption } from "../../../styles/shared/Dropdown";
 import { EditIcon, TrashIcon } from "../../../styles/shared/Icons";
@@ -14,8 +16,12 @@ const CommentDropdown = ({
   posts,
   toggleEdit,
   toggleDropdown,
+  closeDropdown,
   deleteComment,
 }) => {
+  const dropdownRef = useRef();
+  useClickOutside(dropdownRef, closeDropdown);
+
   const onToggleEdit = () => {
     toggleEdit();
     toggleDropdown();
@@ -27,7 +33,7 @@ const CommentDropdown = ({
   };
 
   return (
-    <Dropdown>
+    <Dropdown ref={dropdownRef}>
       <DropdownOption onClick={onToggleEdit}>
         <EditIcon />
         <p>Edit</p>

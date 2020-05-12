@@ -2,9 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { toggleMenu } from "../../../redux/menu/menuActions";
 
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../../redux/users/userSelector";
+import { selectIsMenuOpen } from "../../../redux/menu/menuSelector";
 
 import { LeftSidebarContainer, SidebarNavList } from "./LeftSidebarStyle";
 import {
@@ -12,40 +14,33 @@ import {
   PersonOutlineIcon,
   PeopleOutlineIcon,
   UserReceivedIcon,
-  ChatIcon,
 } from "../../../styles/shared/Icons";
 
-const LeftSidebar = ({ currentUser }) => {
+const LeftSidebar = ({ currentUser, isMenuOpen, toggleMenu }) => {
   return (
-    <LeftSidebarContainer>
-      <Link to="/dashboard/newsfeed">
+    <LeftSidebarContainer isOpen={isMenuOpen}>
+      <Link to="/dashboard/newsfeed" onClick={toggleMenu}>
         <SidebarNavList>
           <NewsIcon />
-          Newsfeed
+          <span>Newsfeed</span>
         </SidebarNavList>
       </Link>
-      <Link to={`/profile/${currentUser._id}/timeline`}>
+      <Link to={`/profile/${currentUser._id}/timeline`} onClick={toggleMenu}>
         <SidebarNavList>
           <PersonOutlineIcon />
-          Profile
+          <span>Profile</span>
         </SidebarNavList>
       </Link>
-      <Link to="/dashboard/friend-list">
+      <Link to="/dashboard/friend-list" onClick={toggleMenu}>
         <SidebarNavList>
           <PeopleOutlineIcon />
-          Friend List
+          <span>Friend List</span>
         </SidebarNavList>
       </Link>
-      <Link to="/dashboard/friend-requests">
+      <Link to="/dashboard/friend-requests" onClick={toggleMenu}>
         <SidebarNavList>
           <UserReceivedIcon />
-          Friend Requests
-        </SidebarNavList>
-      </Link>
-      <Link to="/">
-        <SidebarNavList>
-          <ChatIcon />
-          Chat Messages
+          <span>Friend Requests</span>
         </SidebarNavList>
       </Link>
     </LeftSidebarContainer>
@@ -58,6 +53,7 @@ LeftSidebar.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  isMenuOpen: selectIsMenuOpen,
 });
 
-export default connect(mapStateToProps)(LeftSidebar);
+export default connect(mapStateToProps, { toggleMenu })(LeftSidebar);

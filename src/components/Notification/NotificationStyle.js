@@ -17,6 +17,10 @@ export const NotificationItemDetail = styled.div`
   align-items: center;
 `;
 
+export const NotificationItemChildren = styled.div`
+  margin-left: 1rem;
+`;
+
 export const NotificationDate = styled.p`
   font-size: 1.2rem;
 `;

@@ -47,9 +47,15 @@ export const CommentAction = styled.span`
     css`
       color: ${({ theme }) => theme.secondary};
     `}
+  @media (max-width: 575px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const CommentDate = styled.span`
   display: inline-block;
   font-size: 1.4rem;
+  @media (max-width: 575px) {
+    font-size: 1.2rem;
+  }
 `;

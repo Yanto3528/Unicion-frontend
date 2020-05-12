@@ -64,8 +64,8 @@ const ProfilePage = ({ match, user, currentUser, getUserById }) => {
 
 ProfilePage.propTypes = {
   match: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-  currentUser: PropTypes.object.isRequired,
+  user: PropTypes.object,
+  currentUser: PropTypes.object,
   getUserById: PropTypes.func.isRequired,
 };
 

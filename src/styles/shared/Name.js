@@ -9,4 +9,7 @@ export default styled(Link)`
   &:hover {
     color: ${({ theme }) => theme.primary};
   }
+  @media (max-width: 575px) {
+    font-size: 1.6rem;
+  }
 `;

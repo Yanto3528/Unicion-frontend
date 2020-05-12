@@ -7,15 +7,15 @@ import { selectFriendRequests } from "../../../redux/users/userSelector";
 
 import FriendRequest from "../FriendRequest/FriendRequest";
 
-import { FriendRequestsContainer } from "./FriendRequestDropdownStyle";
-import Dropdown, {
-  DropdownHeader,
-  DropdownTitle,
-} from "../../../styles/shared/Dropdown";
+import {
+  FriendRequestDropdownContainer,
+  FriendRequestsContainer,
+} from "./FriendRequestDropdownStyle";
+import { DropdownHeader, DropdownTitle } from "../../../styles/shared/Dropdown";
 
 const FriendRequestDropdown = ({ friendRequests }) => {
   return (
-    <Dropdown width="50rem">
+    <FriendRequestDropdownContainer>
       <DropdownHeader>
         <DropdownTitle>Friend Requests</DropdownTitle>
       </DropdownHeader>
@@ -26,7 +26,7 @@ const FriendRequestDropdown = ({ friendRequests }) => {
             ))
           : "No friend request"}
       </FriendRequestsContainer>
-    </Dropdown>
+    </FriendRequestDropdownContainer>
   );
 };
 

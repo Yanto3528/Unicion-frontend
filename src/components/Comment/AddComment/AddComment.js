@@ -9,7 +9,7 @@ import { selectCurrentUser } from "../../../redux/users/userSelector";
 import Button from "../../shared/Button/Button";
 
 import { CommentInputForm, CommentInput } from "./AddCommentStyle";
-import Avatar from "../../../styles/shared/Avatar";
+import Avatar from "../../shared/Avatar/Avatar";
 
 import calculateTextareaRows from "../../../utils/CalculateTextareaRows";
 
@@ -47,7 +47,7 @@ const AddComment = ({ currentUser, post, addComment }) => {
 };
 
 AddComment.propTypes = {
-  currentUser: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
   post: PropTypes.object.isRequired,
   addComment: PropTypes.func.isRequired,
 };

@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { MenuIcon } from "../../../styles/shared/Icons";
 
 export const NavbarContainer = styled.div`
   width: 100vw;
@@ -33,4 +34,22 @@ export const NavContainer = styled.div`
 
 export const Logo = styled.img`
   width: 16rem;
+  margin-right: 2rem;
+  @media (max-width: 600px) {
+    width: 10rem;
+    margin-right: 1rem;
+  }
+`;
+
+export const MenuContainer = styled.div`
+  display: flex;
+  align-items: center;
+  ${MenuIcon} {
+    display: none;
+  }
+  @media (max-width: 1000px) {
+    ${MenuIcon} {
+      display: inline-block;
+    }
+  }
 `;

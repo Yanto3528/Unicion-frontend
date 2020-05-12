@@ -13,6 +13,7 @@ import NavbarProfileDropdown from "../NavbarProfileDropdown/NavbarProfileDropdow
 import NotificationDropdown from "../../../Notification/NotificationDropdown/NotificationDropdown";
 import FriendRequestDropdown from "../../../User/FriendRequestDropdown/FriendRequestDropdown";
 import NavItem from "../NavItem/NavItem";
+import Searchbar from "../../Searchbar/Searchbar";
 
 import { NavListContainer, NavListItem } from "./NavListStyle";
 import Avatar from "../../../shared/Avatar/Avatar";
@@ -20,6 +21,7 @@ import {
   PeopleIcon,
   BellIcon,
   ChevronDownIcon,
+  SearchIcon,
 } from "../../../../styles/shared/Icons";
 
 const NavList = ({ currentUser, notifications, friendRequests }) => {
@@ -32,6 +34,9 @@ const NavList = ({ currentUser, notifications, friendRequests }) => {
     currentUser && (
       <Fragment>
         <NavListContainer>
+          <NavListItem>
+            <NavItem icon={SearchIcon} dropdown={Searchbar}></NavItem>
+          </NavListItem>
           <NavListItem>
             <NavItem
               icon={PeopleIcon}

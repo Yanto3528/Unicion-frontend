@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 
 import PostInputModal from "../../PostInput/PostInputModal/PostInputModal";
 import withModal from "../../../shared/HOC/withModal/withModal";
 
+import useClickOutside from "../../../../CustomHook/UseClickOutside";
+
 import Dropdown, { DropdownOption } from "../../../../styles/shared/Dropdown";
 import { EditIcon, TrashIcon } from "../../../../styles/shared/Icons";
 
 const PostDropdown = ({
+  deletePost,
+  showDropdown,
   toggleModal,
   toggleDropdown,
-  showDropdown,
-  deletePost,
+  closeDropdown,
 }) => {
+  const dropdownRef = useRef();
+  useClickOutside(dropdownRef, closeDropdown);
+
   const onEditPost = () => {
     toggleModal();
     toggleDropdown();
@@ -20,7 +26,7 @@ const PostDropdown = ({
 
   return (
     showDropdown && (
-      <Dropdown>
+      <Dropdown ref={dropdownRef}>
         <DropdownOption onClick={onEditPost}>
           <EditIcon />
           <p>Edit</p>

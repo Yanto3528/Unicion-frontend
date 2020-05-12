@@ -27,8 +27,8 @@ const ProfileFriends = ({ user, users, getUserFriends }) => {
 };
 
 ProfileFriends.propTypes = {
-  user: PropTypes.object.isRequired,
-  users: PropTypes.array.isRequired,
+  user: PropTypes.object,
+  users: PropTypes.array,
   getUserFriends: PropTypes.func.isRequired,
 };
 

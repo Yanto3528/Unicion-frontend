@@ -42,7 +42,7 @@ const UserList = ({
 
   if (!users) return <Spinner />;
   return (
-    <Card>
+    <Card main>
       <Title>{title}</Title>
       {users.length > 0 ? (
         <UserListContainer>
@@ -58,8 +58,8 @@ const UserList = ({
 };
 
 UserList.propTypes = {
-  users: PropTypes.object.isRequired,
-  currentUser: PropTypes.object.isRequired,
+  users: PropTypes.array,
+  currentUser: PropTypes.object,
   error: PropTypes.string,
   title: PropTypes.string,
   match: PropTypes.object.isRequired,

@@ -32,6 +32,19 @@ const GlobalStyle = createGlobalStyle`
   textarea {
     font-family: "Montserrat", sans-serif;
   }
+  @media (max-width: 575px) {
+    body {
+      font-size: 1.2rem;
+    }
+    button {
+      font-size: 1.2rem;
+    }
+  }
+  @media (max-width: 400px) {
+    body {
+      font-size: 1rem;
+    }
+  }
 `;
 
 export default GlobalStyle;

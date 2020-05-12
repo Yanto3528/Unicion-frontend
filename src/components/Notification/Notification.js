@@ -10,6 +10,7 @@ import Avatar from "../shared/Avatar/Avatar";
 import {
   NotificationItem,
   NotificationItemDetail,
+  NotificationItemChildren,
   NotificationDate,
 } from "./NotificationStyle";
 import Body from "../../styles/shared/Body";
@@ -22,12 +23,12 @@ const Notification = ({ notification, deleteNotification }) => {
     <NotificationItem>
       <NotificationItemDetail>
         <Avatar src={notification.sender.profile.avatar} />
-        <div>
+        <NotificationItemChildren>
           <Body>{notification.message}</Body>
           <NotificationDate>
             {moment(notification.createdAt).fromNow()}
           </NotificationDate>
-        </div>
+        </NotificationItemChildren>
       </NotificationItemDetail>
       <CloseCircleIcon onClick={onDeleteNotification} />
     </NotificationItem>

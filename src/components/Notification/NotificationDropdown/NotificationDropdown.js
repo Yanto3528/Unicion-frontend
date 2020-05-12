@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -12,6 +12,7 @@ import { selectNotifications } from "../../../redux/notifications/notificationSe
 import Notification from "../Notification";
 
 import {
+  NotificationDropdownContainer,
   NotificationAction,
   NotificationBody,
 } from "./NotificationDropdownStyle";
@@ -24,7 +25,10 @@ const NotificationDropdown = ({
   notifications,
   readNotifications,
   deleteNotifications,
+  toggleDropdown,
 }) => {
+  const dropdownRef = useRef(null);
+
   useEffect(() => {
     if (notifications.some((notification) => notification.read === false)) {
       readNotifications();
@@ -33,7 +37,7 @@ const NotificationDropdown = ({
   }, []);
 
   return (
-    <Dropdown width={"35rem"}>
+    <NotificationDropdownContainer ref={dropdownRef}>
       <DropdownHeader>
         <DropdownTitle>Notifications</DropdownTitle>
         {notifications.length > 0 && (
@@ -49,7 +53,7 @@ const NotificationDropdown = ({
       ) : (
         <NotificationBody>No notification to show</NotificationBody>
       )}
-    </Dropdown>
+    </NotificationDropdownContainer>
   );
 };
 

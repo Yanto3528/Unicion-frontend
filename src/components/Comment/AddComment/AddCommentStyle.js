@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { AvatarContainer } from "../../shared/Avatar/AvatarStyle";
 
 export const CommentInputForm = styled.form`
   margin-top: 1rem;
@@ -11,6 +12,11 @@ export const CommentInputForm = styled.form`
   span {
     width: 3.7rem;
     height: 3.7rem;
+  }
+  @media (max-width: 400px) {
+    ${AvatarContainer} {
+      display: none;
+    }
   }
 `;
 

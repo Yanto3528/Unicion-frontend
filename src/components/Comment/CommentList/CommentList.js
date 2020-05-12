@@ -19,4 +19,4 @@ CommentList.propTypes = {
   comments: PropTypes.array.isRequired,
 };
 
-export default CommentList;
+export default React.memo(CommentList);

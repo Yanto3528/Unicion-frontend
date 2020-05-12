@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 
 const withDropdown = (WrappedComponent) => {
   const Dropdown = (props) => {
@@ -7,14 +7,14 @@ const withDropdown = (WrappedComponent) => {
     const onToggleDropdown = () => {
       setShowDropdown((prevState) => !prevState);
     };
+    const onCloseDropdown = () => setShowDropdown(false);
     return (
-      <Fragment>
-        <WrappedComponent
-          toggleDropdown={onToggleDropdown}
-          showDropdown={showDropdown}
-          {...props}
-        />
-      </Fragment>
+      <WrappedComponent
+        toggleDropdown={onToggleDropdown}
+        closeDropdown={onCloseDropdown}
+        showDropdown={showDropdown}
+        {...props}
+      />
     );
   };
   return Dropdown;

@@ -9,6 +9,7 @@ import { selectUser } from "../../../redux/users/userSelector";
 import Title from "../../shared/Title/Title";
 
 import {
+  ProfileOverviewContainer,
   ProfileOverviewTextGroup,
   ProfileOverviewTitle,
 } from "./ProfileOverviewStyle";
@@ -17,27 +18,29 @@ import Body from "../../../styles/shared/Body";
 
 const ProfileOverview = ({ user }) => {
   return (
-    <Card>
-      <Title pd="0">Profile Intro</Title>
-      {user.profile.bio && (
-        <ProfileOverviewTextGroup>
-          <ProfileOverviewTitle>About me</ProfileOverviewTitle>
-          <Body>{user.profile.bio}</Body>
-        </ProfileOverviewTextGroup>
-      )}
-      {user.profile.birthDate && (
-        <ProfileOverviewTextGroup>
-          <ProfileOverviewTitle>Birth Date</ProfileOverviewTitle>
-          <Body>{moment(user.profile.birthDate).format("LL")}</Body>
-        </ProfileOverviewTextGroup>
-      )}
-      {user.profile.location && (
-        <ProfileOverviewTextGroup>
-          <ProfileOverviewTitle>Current City</ProfileOverviewTitle>
-          <Body>{user.profile.location.city}</Body>
-        </ProfileOverviewTextGroup>
-      )}
-    </Card>
+    <ProfileOverviewContainer>
+      <Card>
+        <Title pd="0">Profile Intro</Title>
+        {user.profile.bio && (
+          <ProfileOverviewTextGroup>
+            <ProfileOverviewTitle>About me</ProfileOverviewTitle>
+            <Body>{user.profile.bio}</Body>
+          </ProfileOverviewTextGroup>
+        )}
+        {user.profile.birthDate && (
+          <ProfileOverviewTextGroup>
+            <ProfileOverviewTitle>Birth Date</ProfileOverviewTitle>
+            <Body>{moment(user.profile.birthDate).format("LL")}</Body>
+          </ProfileOverviewTextGroup>
+        )}
+        {user.profile.location && (
+          <ProfileOverviewTextGroup>
+            <ProfileOverviewTitle>Current City</ProfileOverviewTitle>
+            <Body>{user.profile.location.city}</Body>
+          </ProfileOverviewTextGroup>
+        )}
+      </Card>
+    </ProfileOverviewContainer>
   );
 };
 

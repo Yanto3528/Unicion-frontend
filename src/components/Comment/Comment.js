@@ -33,6 +33,7 @@ const Comment = ({
   currentUser,
   showDropdown,
   toggleDropdown,
+  closeDropdown,
   likeUnlikeComment,
 }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -64,6 +65,7 @@ const Comment = ({
             <CommentDropdown
               toggleEdit={onToggleEdit}
               toggleDropdown={toggleDropdown}
+              closeDropdown={closeDropdown}
               comment={comment}
             />
           )}

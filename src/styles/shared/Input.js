@@ -15,6 +15,9 @@ const InputStyle = css`
 export const Input = styled.input`
   ${InputStyle};
   padding: 1rem 2rem;
+  @media (max-width: 450px) {
+    font-size: 1rem;
+  }
 `;
 
 export const Textarea = styled.textarea`
@@ -24,6 +27,9 @@ export const Textarea = styled.textarea`
   border: 1px solid ${({ theme }) => theme.line};
   border-radius: 0.5rem;
   outline: none;
+  @media (max-width: 450px) {
+    font-size: 1rem;
+  }
 `;
 
 export const Select = styled.select`
@@ -45,6 +51,9 @@ export const InputContainer = styled.div`
     font-weight: 500;
     font-size: 1.6rem;
     color: ${({ theme }) => theme.heading};
+    @media (max-width: 500px) {
+      font-size: 1.4rem;
+    }
   }
   select {
     ${InputStyle}
