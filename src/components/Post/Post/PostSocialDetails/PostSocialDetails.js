@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { useCallback, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { likePost } from "../../../../redux/posts/postActions";
@@ -17,9 +17,9 @@ import {
 } from "../../../../styles/shared/Icons";
 
 const PostSocialDetails = ({ id, likes, comments, likePost, showComments }) => {
-  const onLikePost = () => {
+  const onLikePost = useCallback(() => {
     likePost(id);
-  };
+  }, [id, likePost]);
 
   return (
     <Fragment>

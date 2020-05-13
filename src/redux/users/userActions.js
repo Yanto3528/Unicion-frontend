@@ -125,7 +125,7 @@ export const updateProfile = (id, data, imageFile) => async (dispatch) => {
     console.log(error);
     dispatch({
       type: userTypes.UPDATE_PROFILE_FAIL,
-      payload: error.response.data.error.msg,
+      payload: error.response.data.error,
     });
   }
 };

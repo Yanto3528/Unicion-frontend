@@ -20,15 +20,15 @@ export const SearchInput = styled.input`
 export const SearchIconContainer = styled.span`
   position: absolute;
   top: 50%;
-  right: 0;
-  transform: translate(-2rem, -50%);
+  right: 2rem;
+  transform: translateY(-50%);
   color: ${({ theme }) => theme.primary};
 `;
 
 export const SearchbarContainer = styled.div`
-  width: 40%;
+  width: 50%;
   height: 4rem;
-  @media (max-width: 670px) {
+  @media (max-width: 450px) {
     display: none;
     ${({ isDropdown }) =>
       isDropdown &&
@@ -45,11 +45,12 @@ export const SearchbarContainer = styled.div`
         display: flex;
         justify-content: center;
         ${SearchForm} {
-          width: 50%;
+          width: 90%;
           height: 50%;
         }
         ${SearchIconContainer} {
           top: 2rem;
+          right: 1rem;
         }
       `}
   }

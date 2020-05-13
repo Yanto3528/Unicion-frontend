@@ -9,12 +9,12 @@ import { selectCurrentUser } from "../../../../redux/users/userSelector";
 import Title from "../../../shared/Title/Title";
 import InputFile from "../../../shared/InputFile/InputFile";
 import Button from "../../../shared/Button/Button";
+import Avatar from "../../../shared/Avatar/Avatar";
 
 import { PostInputModalContainer } from "./PostInputModalStyle";
 import { PostTextarea, PostInputForm, PostInputGroup } from "../PostInputStyle";
 import BackgroundOverlay from "../../../../styles/shared/BackgroundOverlay";
 import Card from "../../../../styles/shared/Card";
-import Avatar from "../../../../styles/shared/Avatar";
 import { GreyButton } from "../../../shared/Button/ButtonStyle";
 import UploadImagePlaceholder from "../../../../styles/shared/UploadImagePlaceholder";
 

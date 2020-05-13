@@ -14,4 +14,7 @@ export const ProfileOverviewTextGroup = styled.div`
 export const ProfileOverviewTitle = styled.h4`
   font-weight: 500;
   font-size: 1.8rem;
+  @media (max-width: 600px) {
+    font-size: 1.4rem;
+  }
 `;

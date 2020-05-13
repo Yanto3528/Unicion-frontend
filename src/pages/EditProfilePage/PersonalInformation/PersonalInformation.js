@@ -56,7 +56,7 @@ const PersonalInformation = ({
     state: profile.location.state,
     address: profile.address,
     occupation: profile.occupation || "",
-    status: profile.status || "",
+    status: profile.status || "single",
     gender: profile.gender,
     birthDate: profile.birthDate && new Date(profile.birthDate),
     bio: profile.bio || "",
@@ -158,7 +158,6 @@ const PersonalInformation = ({
               placeholder="Enter your first name"
               value={firstName}
               onChange={onChange}
-              required
             />
           </InputContainer>
           <InputContainer half>
@@ -170,7 +169,6 @@ const PersonalInformation = ({
               placeholder="Enter your last name"
               value={lastName}
               onChange={onChange}
-              required
             />
           </InputContainer>
         </InputParentContainer>
@@ -221,7 +219,6 @@ const PersonalInformation = ({
               placeholder="Enter your occupation"
               value={occupation}
               onChange={onChange}
-              required
             />
           </InputContainer>
         </InputParentContainer>
@@ -253,7 +250,6 @@ const PersonalInformation = ({
             placeholder="Enter your street address (ex. 123 street road)"
             value={address}
             onChange={onChange}
-            required
           />
         </InputContainer>
         <InputContainer>

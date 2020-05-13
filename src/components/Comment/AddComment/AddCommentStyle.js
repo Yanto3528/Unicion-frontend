@@ -33,4 +33,8 @@ export const CommentInput = styled.textarea`
   &:focus {
     border-color: ${({ theme }) => theme.primary};
   }
+  @media (max-width: 400px) {
+    margin-left: 0;
+    font-size: 1rem;
+  }
 `;

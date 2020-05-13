@@ -12,4 +12,7 @@ export default styled(Link)`
   @media (max-width: 575px) {
     font-size: 1.6rem;
   }
+  @media (max-width: 400px) {
+    font-size: 1.4rem;
+  }
 `;

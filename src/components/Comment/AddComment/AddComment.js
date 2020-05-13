@@ -35,7 +35,6 @@ const AddComment = ({ currentUser, post, addComment }) => {
     <CommentInputForm onSubmit={onSubmit}>
       <Avatar src={currentUser.profile.avatar} />
       <CommentInput
-        type="text"
         placeholder="Write a comment"
         rows={rows}
         onChange={onChange}

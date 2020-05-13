@@ -35,21 +35,25 @@ const NavList = ({ currentUser, notifications, friendRequests }) => {
       <Fragment>
         <NavListContainer>
           <NavListItem>
-            <NavItem icon={SearchIcon} dropdown={Searchbar}></NavItem>
+            <NavItem
+              icon={SearchIcon}
+              dropdown={Searchbar}
+              hasNotif={hasFriendRequest}
+            />
           </NavListItem>
           <NavListItem>
             <NavItem
               icon={PeopleIcon}
               dropdown={FriendRequestDropdown}
               hasNotif={hasFriendRequest}
-            ></NavItem>
+            />
           </NavListItem>
           <NavListItem>
             <NavItem
               icon={BellIcon}
               dropdown={NotificationDropdown}
               hasNotif={hasNotif}
-            ></NavItem>
+            />
           </NavListItem>
           <NavListItem>
             <NavItem icon={ChevronDownIcon} dropdown={NavbarProfileDropdown}>

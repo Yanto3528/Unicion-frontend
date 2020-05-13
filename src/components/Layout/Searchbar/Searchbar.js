@@ -13,7 +13,7 @@ import {
 } from "./SearchbarStyle";
 import { SearchIcon } from "../../../styles/shared/Icons";
 
-const Searchbar = ({ history, isDropdown }) => {
+const Searchbar = ({ history, isDropdown, toggleDropdown }) => {
   const [query, setQuery] = useState("");
   const [placeholderText, setPlaceholderText] = useState("Search people...");
 
@@ -23,6 +23,7 @@ const Searchbar = ({ history, isDropdown }) => {
     event.preventDefault();
     if (query === "")
       return setPlaceholderText("Please enter something to search for.");
+    if (isDropdown) toggleDropdown();
     history.push(`/dashboard/search/${query}`);
     setQuery("");
   };

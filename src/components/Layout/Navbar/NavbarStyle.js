@@ -1,28 +1,20 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { MenuIcon } from "../../../styles/shared/Icons";
 
 export const NavbarContainer = styled.div`
   width: 100vw;
   height: 6rem;
-  position: fixed;
+  position: relative;
+  background-color: transparent;
   z-index: 10;
-  ${({ isAuthenticated }) =>
-    isAuthenticated &&
-    css`
-      position: relative;
-      ${NavOuterContainer} {
-        background-color: white;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      }
-    `}
 `;
 
 export const NavOuterContainer = styled.div`
   position: fixed;
   width: 100%;
   height: 6rem;
-  box-shadow: none;
-  background-color: transparent;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 `;
 
 export const NavContainer = styled.div`
@@ -38,6 +30,17 @@ export const Logo = styled.img`
   @media (max-width: 600px) {
     width: 10rem;
     margin-right: 1rem;
+  }
+  @media (max-width: 700px) {
+    display: none;
+  }
+`;
+
+export const SmallLogo = styled(Logo)`
+  display: none;
+  @media (max-width: 700px) {
+    display: inline;
+    width: 3rem;
   }
 `;
 

@@ -5,4 +5,7 @@ export const DashboardContainer = styled.div`
   align-items: flex-start;
   margin-top: 4rem;
   position: relative;
+  @media (max-width: 600px) {
+    margin-top: 2rem;
+  }
 `;

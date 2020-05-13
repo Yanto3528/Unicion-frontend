@@ -31,4 +31,13 @@ export const ProfileFriendAvatar = styled.div`
   width: 15rem;
   height: 15rem;
   margin-right: 2rem;
+  @media (max-width: 500px) {
+    width: 10rem;
+    height: 10rem;
+    margin-right: 1rem;
+  }
+  @media (max-width: 400px) {
+    width: 5rem;
+    height: 5rem;
+  }
 `;

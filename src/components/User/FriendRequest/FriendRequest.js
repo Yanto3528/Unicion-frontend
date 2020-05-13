@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteRequest, acceptRequest } from "../../../redux/users/userActions";
@@ -15,13 +15,13 @@ import Name from "../../../styles/shared/Name";
 import Body from "../../../styles/shared/Body";
 
 const FriendRequest = ({ user, deleteRequest, acceptRequest }) => {
-  const onDeleteFriendRequest = () => {
+  const onDeleteFriendRequest = useCallback(() => {
     deleteRequest(user._id);
-  };
+  }, [deleteRequest, user._id]);
 
-  const onAcceptRequest = () => {
+  const onAcceptRequest = useCallback(() => {
     acceptRequest(user._id);
-  };
+  }, [acceptRequest, user._id]);
 
   return (
     <FriendRequestContainer>

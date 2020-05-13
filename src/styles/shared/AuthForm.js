@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export default styled.div`
-  max-width: 80%;
+  max-width: 90%;
   width: 50rem;
+  padding: 2rem 0;
 `;
 
 export const AuthFormContainer = styled.form`

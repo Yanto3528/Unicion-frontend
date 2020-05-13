@@ -1,5 +1,17 @@
 import styled from "styled-components";
 import { ChevronDownIcon } from "../../../styles/shared/Icons";
+import Card from "../../../styles/shared/Card";
+import { AvatarStyle } from "../../shared/Avatar/AvatarStyle";
+
+export const PostContainer = styled(Card)`
+  margin-bottom: 2rem;
+  @media (max-width: 450px) {
+    ${AvatarStyle} {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+`;
 
 export const PostHeader = styled.div`
   display: flex;
@@ -43,4 +55,10 @@ export const PostImage = styled.div`
   background-image: ${({ src }) => `url(${src})`};
   background-position: center;
   background-size: cover;
+  @media (max-width: 600px) {
+    height: 30rem;
+  }
+  @media (max-width: 400px) {
+    height: 20rem;
+  }
 `;

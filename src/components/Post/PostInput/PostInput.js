@@ -7,10 +7,10 @@ import { selectCurrentUser } from "../../../redux/users/userSelector";
 
 import withModal from "../../shared/HOC/withModal/withModal";
 import PostInputModal from "./PostInputModal/PostInputModal";
+import Avatar from "../../shared/Avatar/Avatar";
 
 import { PostInputForm, PostInputGroup, PostInputText } from "./PostInputStyle";
 import Card from "../../../styles/shared/Card";
-import Avatar from "../../../styles/shared/Avatar";
 
 const PostInput = ({ currentUser, toggleModal }) => {
   return (

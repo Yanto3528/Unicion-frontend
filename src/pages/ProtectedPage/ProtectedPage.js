@@ -42,7 +42,7 @@ const ProtectedPage = ({
   useEffect(() => {
     socket = io("http://localhost:5000");
     if (currentUser) {
-      socket.emit("online", currentUser._id, () => {});
+      socket.emit("online", currentUser._id);
     }
     socket.on("get-notification", (notification) => {
       addNotification(notification);

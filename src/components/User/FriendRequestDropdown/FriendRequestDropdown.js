@@ -13,7 +13,7 @@ import {
 } from "./FriendRequestDropdownStyle";
 import { DropdownHeader, DropdownTitle } from "../../../styles/shared/Dropdown";
 
-const FriendRequestDropdown = ({ friendRequests }) => {
+const FriendRequestDropdown = ({ friendRequests, closeDropdown }) => {
   return (
     <FriendRequestDropdownContainer>
       <DropdownHeader>

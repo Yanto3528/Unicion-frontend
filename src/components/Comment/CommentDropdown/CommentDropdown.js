@@ -6,7 +6,7 @@ import { deleteComment } from "../../../redux/comments/commentActions";
 import { createStructuredSelector } from "reselect";
 import { selectPosts } from "../../../redux/posts/postSelector";
 
-import useClickOutside from "../../../CustomHook/UseClickOutside";
+import useClickOutside from "../../../CustomHook/useClickOutside";
 
 import Dropdown, { DropdownOption } from "../../../styles/shared/Dropdown";
 import { EditIcon, TrashIcon } from "../../../styles/shared/Icons";

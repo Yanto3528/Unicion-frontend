@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
@@ -16,37 +16,37 @@ import {
   NavOuterContainer,
   NavContainer,
   Logo,
+  SmallLogo,
   MenuContainer,
 } from "./NavbarStyle";
 import { MenuIcon } from "../../../styles/shared/Icons";
 
 import logo from "../../../assets/logo.svg";
-import logoWhite from "../../../assets/logo-white.svg";
+import logoSmall from "../../../assets/logo-sm.svg";
 
 const Navbar = ({ isAuthenticated, toggleMenu }) => {
   const location = useLocation();
   const showMenuIcon = !location.pathname.includes("profile");
   return (
-    <NavbarContainer isAuthenticated={isAuthenticated}>
-      <NavOuterContainer>
-        <Container>
-          <NavContainer>
-            <MenuContainer>
-              <Link to="/dashboard/newsfeed">
-                <Logo src={isAuthenticated ? logo : logoWhite} alt="Unicion" />
-              </Link>
-              {showMenuIcon && <MenuIcon onClick={toggleMenu} />}
-            </MenuContainer>
-            {isAuthenticated && (
-              <Fragment>
-                <Searchbar />
-                <NavList />
-              </Fragment>
-            )}
-          </NavContainer>
-        </Container>
-      </NavOuterContainer>
-    </NavbarContainer>
+    isAuthenticated && (
+      <NavbarContainer>
+        <NavOuterContainer>
+          <Container>
+            <NavContainer>
+              <MenuContainer>
+                <Link to="/dashboard/newsfeed">
+                  <Logo src={logo} alt="Unicion" />
+                  <SmallLogo src={logoSmall} alt="Unicion" />
+                </Link>
+                {showMenuIcon && <MenuIcon onClick={toggleMenu} />}
+              </MenuContainer>
+              <Searchbar />
+              <NavList />
+            </NavContainer>
+          </Container>
+        </NavOuterContainer>
+      </NavbarContainer>
+    )
   );
 };
 

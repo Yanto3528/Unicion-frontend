@@ -8,6 +8,9 @@ export const NavListContainer = styled.ul`
 `;
 
 export const NavListItem = styled.li`
+  :first-child {
+    display: none;
+  }
   &:not(:last-child) {
     margin-right: 5rem;
   }
@@ -21,6 +24,11 @@ export const NavListItem = styled.li`
       width: 3rem;
       height: 3rem;
       margin-right: 0;
+    }
+  }
+  @media (max-width: 450px) {
+    :first-child {
+      display: block;
     }
   }
 `;

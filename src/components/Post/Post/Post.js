@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useCallback, Fragment } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { connect } from "react-redux";
@@ -16,11 +16,11 @@ import PostSocialDetails from "./PostSocialDetails/PostSocialDetails";
 // HOC
 import withDropdown from "../../shared/HOC/withDropdown/withDropdown";
 
+import Avatar from "../../shared/Avatar/Avatar";
+
 // Styles
-import Card from "../../../styles/shared/Card";
-import Avatar from "../../../styles/shared/Avatar";
-import Body from "../../../styles/shared/Body";
 import {
+  PostContainer,
   PostHeader,
   PostTitle,
   PostNameContainer,
@@ -30,6 +30,7 @@ import {
 } from "./PostStyle";
 import { ChevronDownIcon } from "../../../styles/shared/Icons";
 import Name from "../../../styles/shared/Name";
+import Body from "../../../styles/shared/Body";
 
 const Post = ({
   post,
@@ -44,16 +45,16 @@ const Post = ({
   const timeString = moment(post.createdAt).fromNow();
   const isPostedByCurrentUser = post.postedBy._id === currentUser._id;
 
-  const onDeletePost = () => {
+  const onDeletePost = useCallback(() => {
     deletePost(post._id);
-  };
+  }, [post._id, deletePost]);
 
-  const onShowComments = () => {
+  const onShowComments = useCallback(() => {
     setShowComments(true);
-  };
+  }, []);
 
   return (
-    <Card mb="2rem">
+    <PostContainer>
       <PostHeader>
         <Avatar src={profile.avatar} />
         <PostTitle>
@@ -92,7 +93,7 @@ const Post = ({
           <AddComment post={post} />
         </Fragment>
       )}
-    </Card>
+    </PostContainer>
   );
 };
 

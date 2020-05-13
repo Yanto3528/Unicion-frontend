@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useCallback, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { likeUnlikeComment } from "../../redux/comments/commentActions";
@@ -12,6 +12,7 @@ import moment from "moment";
 import withDropdown from "../shared/HOC/withDropdown/withDropdown";
 import CommentDropdown from "./CommentDropdown/CommentDropdown";
 import CommentEdit from "./CommentEdit/CommentEdit";
+import Avatar from "../shared/Avatar/Avatar";
 
 import {
   CommentContainer,
@@ -22,7 +23,6 @@ import {
   CommentFooterContainer,
   CommentFooter,
 } from "./CommentStyle";
-import Avatar from "../../styles/shared/Avatar";
 import Body from "../../styles/shared/Body";
 import Name from "../../styles/shared/Name";
 import { ChevronDownIcon } from "../../styles/shared/Icons";
@@ -41,14 +41,14 @@ const Comment = ({
   const timeString = moment(comment.createdAt).fromNow();
   const unlike = comment.likes.includes(currentUser._id);
 
-  const onToggleEdit = () => {
+  const onToggleEdit = useCallback(() => {
     setIsEdit((prevState) => !prevState);
-  };
+  }, []);
 
-  const onLikeUnlikeComment = () => {
+  const onLikeUnlikeComment = useCallback(() => {
     const post = posts.find((post) => post._id === comment.post);
     likeUnlikeComment(comment._id, post._id);
-  };
+  }, [comment._id, comment.post, likeUnlikeComment, posts]);
 
   return (
     <CommentContainer>

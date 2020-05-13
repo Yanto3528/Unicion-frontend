@@ -14,6 +14,9 @@ export const AboutGroup = styled.div`
 export const AboutGroupText = styled.p`
   font-weight: 500;
   width: 20rem;
+  @media (max-width: 500px) {
+    width: 8rem;
+  }
 `;
 
 export const AboutGroupValue = styled.p`

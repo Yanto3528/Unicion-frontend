@@ -21,6 +21,10 @@ export const ButtonContainer = styled.button`
       width: 100%;
       font-size: 1.4rem;
     `}
+  @media (max-width: 600px) {
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+  }
 `;
 
 export const GreyButton = styled(ButtonContainer)`

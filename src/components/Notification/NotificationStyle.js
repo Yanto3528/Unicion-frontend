@@ -15,6 +15,7 @@ export const NotificationItem = styled.div`
 export const NotificationItemDetail = styled.div`
   display: flex;
   align-items: center;
+  flex: 1;
 `;
 
 export const NotificationItemChildren = styled.div`

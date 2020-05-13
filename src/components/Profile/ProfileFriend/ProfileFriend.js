@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { sendRequest, deleteFriend } from "../../../redux/users/userActions";
@@ -19,13 +19,13 @@ import { GreyButton } from "../../shared/Button/ButtonStyle";
 import { CheckIcon } from "../../../styles/shared/Icons";
 
 const ProfileFriend = ({ user, currentUser, sendRequest, deleteFriend }) => {
-  const onDeleteFriend = () => {
+  const onDeleteFriend = useCallback(() => {
     deleteFriend(user._id);
-  };
+  }, [user._id, deleteFriend]);
 
-  const onSendFriendRequest = () => {
+  const onSendFriendRequest = useCallback(() => {
     sendRequest(user._id);
-  };
+  }, [user._id, sendRequest]);
 
   let button;
   if (currentUser.friends.includes(user._id))

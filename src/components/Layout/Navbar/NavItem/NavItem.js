@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 import withDropdown from "../../../shared/HOC/withDropdown/withDropdown";
-import useClickOutside from "../../../../CustomHook/UseClickOutside";
+import useClickOutside from "../../../../CustomHook/useClickOutside";
 
 import { NavItemContainer } from "./NavItemStyle";
 
@@ -16,16 +16,13 @@ const NavItem = ({
 }) => {
   const dropdownRef = useRef();
   useClickOutside(dropdownRef, closeDropdown);
-
   return (
-    <NavItemContainer
-      hasNotif={hasNotif}
-      onClick={toggleDropdown}
-      ref={dropdownRef}
-    >
+    <NavItemContainer hasNotif={hasNotif} ref={dropdownRef}>
       {children}
-      <IconComponent />
-      {showDropdown && <DropdownComponent isDropdown={true} />}
+      <IconComponent onClick={toggleDropdown} />
+      {showDropdown && (
+        <DropdownComponent isDropdown={true} toggleDropdown={toggleDropdown} />
+      )}
     </NavItemContainer>
   );
 };
