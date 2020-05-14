@@ -1,5 +1,6 @@
 import notificationTypes from "./notificationTypes";
 import axios from "axios";
+import { endpoint } from "../../config/config";
 
 import { asyncRequest } from "../utils/asyncRequest";
 
@@ -8,7 +9,7 @@ export const getNotifications = () => (dispatch) => {
   dispatch(
     asyncRequest(
       "GET",
-      "/api/notifications",
+      `${endpoint}/api/notifications`,
       null,
       notificationTypes.GET_NOTIFICATIONS_SUCCESS,
       notificationTypes.GET_NOTIFICATIONS_FAIL
@@ -27,7 +28,7 @@ export const addNotification = (notification) => (dispatch) => {
 // Read notification
 export const readNotifications = () => async (dispatch) => {
   try {
-    await axios.put("/api/notifications");
+    await axios.put(`${endpoint}/api/notifications`);
     dispatch({
       type: notificationTypes.READ_NOTIFICATIONS_SUCCESS,
     });
@@ -45,7 +46,7 @@ export const deleteNotifications = () => (dispatch) => {
   dispatch(
     asyncRequest(
       "DELETE",
-      `/api/notifications`,
+      `${endpoint}/api/notifications`,
       null,
       notificationTypes.DELETE_NOTIFICATIONS_SUCCESS,
       notificationTypes.DELETE_NOTIFICATIONS_FAIL
@@ -56,7 +57,7 @@ export const deleteNotifications = () => (dispatch) => {
 // delete single notification
 export const deleteNotification = (id) => async (dispatch) => {
   try {
-    await axios.delete(`/api/notifications/${id}`);
+    await axios.delete(`${endpoint}/api/notifications/${id}`);
     dispatch({
       type: notificationTypes.DELETE_NOTIFICATION_SUCCESS,
       payload: id,

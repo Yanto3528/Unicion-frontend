@@ -26,13 +26,13 @@ const Dashboard = ({ currentUser, match, getPosts }) => {
     getPosts();
     //eslint-disable-next-line
   }, []);
-  if (!currentUser) return <Spinner center />;
+  if (!currentUser) return <Spinner fullScreen />;
   return (
     <Container>
       <DashboardContainer>
         <LeftSidebar />
         <Switch>
-          <Suspense fallback={<Spinner center />}>
+          <Suspense fallback={<Spinner fullScreen />}>
             <Route exact path={`${match.path}/newsfeed`} component={Newsfeed} />
             <Route
               exact

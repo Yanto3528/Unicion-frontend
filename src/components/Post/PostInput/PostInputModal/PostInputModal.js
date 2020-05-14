@@ -102,7 +102,7 @@ const PostInputModal = ({
 };
 
 PostInputModal.propTypes = {
-  post: PropTypes.object.isRequired,
+  post: PropTypes.object,
   currentUser: PropTypes.object.isRequired,
   isEdit: PropTypes.bool,
   toggleModal: PropTypes.func,

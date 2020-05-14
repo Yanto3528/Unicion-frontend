@@ -11,6 +11,7 @@ import {
   addFriendRequest,
 } from "../../redux/users/userActions";
 import io from "socket.io-client";
+import { endpoint } from "../../config/config";
 
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/users/userSelector";
@@ -40,7 +41,7 @@ const ProtectedPage = ({
     //eslint-disable-next-line
   }, []);
   useEffect(() => {
-    socket = io("http://localhost:5000");
+    socket = io(endpoint);
     if (currentUser) {
       socket.emit("online", currentUser._id);
     }

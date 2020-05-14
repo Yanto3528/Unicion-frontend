@@ -40,7 +40,7 @@ const UserList = ({
     getUserFriends,
   ]);
 
-  if (!users) return <Spinner />;
+  if (!users) return <Spinner center />;
   return (
     <Card main>
       <Title>{title}</Title>

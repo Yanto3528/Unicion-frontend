@@ -1,17 +1,18 @@
 import postTypes from "./postTypes";
 import axios from "axios";
+import { endpoint } from "../../config/config";
 
 import { asyncRequest, asyncRequestWithId } from "../utils/asyncRequest";
 
 // Get posts
 export const getPosts = (id = null) => (dispatch) => {
   dispatch(setLoadingPosts());
-  let endpoint = "/api/posts";
-  if (id) endpoint = `/api/posts/${id}`;
+  let url = `${endpoint}/api/posts`;
+  if (id) url = `${endpoint}/api/posts/${id}`;
   dispatch(
     asyncRequest(
       "GET",
-      endpoint,
+      url,
       null,
       postTypes.GET_POSTS_SUCCESS,
       postTypes.GET_POSTS_FAIL
@@ -20,7 +21,8 @@ export const getPosts = (id = null) => (dispatch) => {
 };
 
 // Create new post
-export const createPost = (text, imageFile) => (dispatch) => {
+export const createPost = (text, imageFile) => async (dispatch) => {
+  dispatch(setLoadingPosts());
   const formData = new FormData();
   if (imageFile) {
     formData.append("image", imageFile);
@@ -29,7 +31,7 @@ export const createPost = (text, imageFile) => (dispatch) => {
   dispatch(
     asyncRequest(
       "POST",
-      `/api/posts`,
+      `${endpoint}/api/posts`,
       formData,
       postTypes.ADD_POST_SUCCESS,
       postTypes.ADD_POST_FAIL
@@ -39,13 +41,14 @@ export const createPost = (text, imageFile) => (dispatch) => {
 
 // Update post
 export const updatePost = (text, imageFile, id) => (dispatch) => {
+  dispatch(setLoadingPosts());
   const formData = new FormData();
   if (imageFile) formData.append("image", imageFile);
   formData.append("text", text);
   dispatch(
     asyncRequestWithId(
       "PUT",
-      `/api/posts/${id}`,
+      `${endpoint}/api/posts/${id}`,
       id,
       formData,
       postTypes.UPDATE_POST_SUCCESS,
@@ -58,7 +61,7 @@ export const likePost = (id) => (dispatch) => {
   dispatch(
     asyncRequestWithId(
       "PUT",
-      `/api/posts/${id}/like`,
+      `${endpoint}/api/posts/${id}/like`,
       id,
       null,
       postTypes.LIKE_UNLIKE_POST_SUCCESS,
@@ -69,8 +72,9 @@ export const likePost = (id) => (dispatch) => {
 
 // Delete post
 export const deletePost = (id) => async (dispatch) => {
+  dispatch(setLoadingPosts());
   try {
-    await axios.delete(`/api/posts/${id}`);
+    await axios.delete(`${endpoint}/api/posts/${id}`);
     dispatch({
       type: postTypes.DELETE_POST_SUCCESS,
       payload: id,

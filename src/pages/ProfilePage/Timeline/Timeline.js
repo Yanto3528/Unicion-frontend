@@ -16,7 +16,7 @@ const Timeline = ({ posts, user, getPosts }) => {
   useEffect(() => {
     getPosts(user._id);
     //eslint-disable-next-line
-  }, [user]);
+  }, [user._id]);
   return (
     <TimelineContainer>
       <ProfileOverview />

@@ -8,10 +8,10 @@ import Dropdown, { DropdownOption } from "../../../../styles/shared/Dropdown";
 
 import { PersonOutlineIcon, LogoutIcon } from "../../../../styles/shared/Icons";
 
-const NavbarProfileDropdown = ({ logout }) => {
+const NavbarProfileDropdown = ({ logout, toggleDropdown }) => {
   return (
     <Dropdown width="20rem">
-      <DropdownOption>
+      <DropdownOption onClick={toggleDropdown}>
         <PersonOutlineIcon />
         <Link to="/edit-profile/personal-information">Edit Profile</Link>
       </DropdownOption>

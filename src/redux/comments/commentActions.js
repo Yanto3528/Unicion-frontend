@@ -1,5 +1,6 @@
 import commentTypes from "./commentTypes";
 import axios from "axios";
+import { endpoint } from "../../config/config";
 
 import { asyncRequestWithId } from "../utils/asyncRequest";
 
@@ -9,7 +10,7 @@ export const addComment = (text, postId) => async (dispatch) => {
   dispatch(
     asyncRequestWithId(
       "POST",
-      `/api/posts/${postId}/comments`,
+      `${endpoint}/api/posts/${postId}/comments`,
       postId,
       text,
       commentTypes.ADD_COMMENT_SUCCESS,
@@ -22,7 +23,7 @@ export const addComment = (text, postId) => async (dispatch) => {
 export const updateComment = (text, id, postId) => async (dispatch) => {
   dispatch(setLoadingComments(postId));
   try {
-    const res = await axios.put(`/api/comments/${id}`, text);
+    const res = await axios.put(`${endpoint}/api/comments/${id}`, text);
     dispatch({
       type: commentTypes.UPDATE_COMMENT_SUCCESS,
       payload: { res: res.data.data, id, postId },
@@ -39,7 +40,7 @@ export const updateComment = (text, id, postId) => async (dispatch) => {
 // Like / Unlike a comment
 export const likeUnlikeComment = (id, postId) => async (dispatch) => {
   try {
-    const res = await axios.put(`/api/comments/${id}/like`);
+    const res = await axios.put(`${endpoint}/api/comments/${id}/like`);
     dispatch({
       type: commentTypes.LIKE_UNLIKE_COMMENT_SUCCESS,
       payload: { res: res.data.data, id, postId },
@@ -56,7 +57,7 @@ export const likeUnlikeComment = (id, postId) => async (dispatch) => {
 // Delete comment
 export const deleteComment = (id, postId) => async (dispatch) => {
   try {
-    await axios.delete(`/api/comments/${id}`);
+    await axios.delete(`${endpoint}/api/comments/${id}`);
     dispatch({
       type: commentTypes.DELETE_COMMENT_SUCCESS,
       payload: { id, postId },

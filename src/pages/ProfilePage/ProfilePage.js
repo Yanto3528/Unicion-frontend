@@ -48,7 +48,7 @@ const ProfilePage = ({ match, user, currentUser, getUserById }) => {
       </Card>
       <ProfileNav links={links} />
       <Switch>
-        <Suspense fallback={<Spinner fullScreen />}>
+        <Suspense fallback={<Spinner center />}>
           <Route exact path={`${match.url}/timeline`} component={Timeline} />
           <Route exact path={`${match.url}/about`} component={About} />
           <Route

@@ -25,7 +25,7 @@ const App = ({ loadUser, currentUser }) => {
       <Navbar />
       <Switch>
         <ErrorBoundary>
-          <Suspense fallback={<Spinner />}>
+          <Suspense fallback={<Spinner fullScreen />}>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route

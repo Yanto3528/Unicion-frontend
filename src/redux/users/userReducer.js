@@ -8,6 +8,7 @@ const initialState = {
   friendRequests: [],
   isAuthenticated: false,
   loading: true,
+  loadingImage: false,
   error: null,
   msg: null,
 };
@@ -109,7 +110,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         user: { ...state.user, profile: action.payload },
-        loading: false,
+        loadingImage: false,
         error: null,
       };
     case userTypes.UPDATE_PROFILE_SUCCESS:
@@ -136,6 +137,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        loadingImage: false,
         error: action.payload,
       };
     case userTypes.GET_USERS_FRIENDS_FAIL:
@@ -170,6 +172,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: action.payload,
+      };
+    case userTypes.SET_LOADING_IMAGE:
+      return {
+        ...state,
+        loadingImage: true,
       };
     case userTypes.CLEAR_ERRORS:
       return {

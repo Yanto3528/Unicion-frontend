@@ -1,5 +1,6 @@
 import userTypes from "./userTypes";
 import axios from "axios";
+import { endpoint } from "../../config/config";
 
 import setAuthToken from "../../utils/setAuthToken";
 import { asyncRequest, asyncRequestWithId } from "../utils/asyncRequest";
@@ -10,7 +11,7 @@ export const searchUsers = (query) => (dispatch) => {
   dispatch(
     asyncRequest(
       "GET",
-      `/api/profiles?s=${query}`,
+      `${endpoint}/api/profiles?s=${query}`,
       null,
       userTypes.SEARCH_USERS_SUCCESS,
       userTypes.SEARCH_USERS_FAIL
@@ -24,7 +25,7 @@ export const getUserFriends = (id) => (dispatch) => {
   dispatch(
     asyncRequest(
       "GET",
-      `/api/users/${id}/friends`,
+      `${endpoint}/api/users/${id}/friends`,
       null,
       userTypes.GET_USERS_FRIENDS_SUCCESS,
       userTypes.GET_USERS_FRIENDS_FAIL
@@ -38,7 +39,7 @@ export const getFriendRequests = () => (dispatch) => {
   dispatch(
     asyncRequest(
       "GET",
-      `/api/users/friend-requests`,
+      `${endpoint}/api/users/friend-requests`,
       null,
       userTypes.GET_FRIEND_REQUEST_SUCCESS,
       userTypes.GET_FRIEND_REQUEST_FAIL
@@ -52,7 +53,7 @@ export const getUserById = (id) => (dispatch) => {
   dispatch(
     asyncRequest(
       "GET",
-      `/api/users/${id}/user`,
+      `${endpoint}/api/users/${id}/user`,
       null,
       userTypes.GET_USER_BY_ID_SUCCESS,
       userTypes.GET_USER_BY_ID_FAIL
@@ -64,7 +65,7 @@ export const getUserById = (id) => (dispatch) => {
 export const register = (formData) => (dispatch) => {
   dispatch(
     authPostRequest(
-      `/api/users/register`,
+      `${endpoint}/api/users/register`,
       formData,
       userTypes.REGISTER_SUCCESS,
       userTypes.REGISTER_FAIL
@@ -76,7 +77,7 @@ export const register = (formData) => (dispatch) => {
 export const login = (formData) => (dispatch) => {
   dispatch(
     authPostRequest(
-      `/api/users/login`,
+      `${endpoint}/api/users/login`,
       formData,
       userTypes.LOGIN_SUCCESS,
       userTypes.LOGIN_FAIL
@@ -100,7 +101,7 @@ export const loadUser = () => (dispatch) => {
   dispatch(
     asyncRequest(
       "GET",
-      `/api/users/me`,
+      `${endpoint}/api/users/me`,
       null,
       userTypes.USER_LOADED,
       userTypes.AUTH_FAIL
@@ -116,7 +117,7 @@ export const updateProfile = (id, data, imageFile) => async (dispatch) => {
   Object.keys(data).forEach((key) => formData.append(key, data[key]));
   if (imageFile) formData.append("image", imageFile);
   try {
-    const res = await axios.put(`/api/profiles/${id}`, formData);
+    const res = await axios.put(`${endpoint}/api/profiles/${id}`, formData);
     dispatch({
       type: userTypes.UPDATE_PROFILE_SUCCESS,
       payload: { msg: res.data.msg, res: res.data.data },
@@ -134,7 +135,10 @@ export const updateProfile = (id, data, imageFile) => async (dispatch) => {
 export const changePassword = (formData) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const res = await axios.put(`/api/users/update-password`, formData);
+    const res = await axios.put(
+      `${endpoint}/api/users/update-password`,
+      formData
+    );
     dispatch({
       type: userTypes.CHANGE_PASSWORD_SUCCESS,
       payload: res.data.msg,
@@ -152,11 +156,11 @@ export const changePassword = (formData) => async (dispatch) => {
 export const uploadCoverImage = (id, image) => (dispatch) => {
   const formData = new FormData();
   formData.append("image", image);
-  dispatch(setLoading());
+  dispatch(setLoadingImage());
   dispatch(
     asyncRequest(
       "PUT",
-      `/api/profiles/${id}/cover-photo`,
+      `${endpoint}/api/profiles/${id}/cover-photo`,
       formData,
       userTypes.UPLOAD_COVER_PHOTO_SUCCESS,
       userTypes.UPLOAD_COVER_PHOTO_FAIL
@@ -178,7 +182,7 @@ export const sendRequest = (id) => async (dispatch) => {
   dispatch(
     asyncRequest(
       "PUT",
-      `/api/users/${id}/friend-request`,
+      `${endpoint}/api/users/${id}/friend-request`,
       null,
       userTypes.SEND_FRIEND_REQUEST_SUCCESS,
       userTypes.SEND_FRIEND_REQUEST_FAIL
@@ -192,7 +196,7 @@ export const acceptRequest = (id) => async (dispatch) => {
   dispatch(
     asyncRequestWithId(
       "PUT",
-      `/api/users/${id}/accept-friend-request`,
+      `${endpoint}/api/users/${id}/accept-friend-request`,
       id,
       null,
       userTypes.ACCEPT_FRIEND_REQUEST_SUCCESS,
@@ -207,7 +211,7 @@ export const deleteRequest = (id) => async (dispatch) => {
   dispatch(
     asyncRequestWithId(
       "DELETE",
-      `/api/users/${id}/delete-friend-request`,
+      `${endpoint}/api/users/${id}/delete-friend-request`,
       id,
       null,
       userTypes.DELETE_FRIEND_REQUEST_SUCCESS,
@@ -222,7 +226,7 @@ export const deleteFriend = (id) => (dispatch) => {
   dispatch(
     asyncRequest(
       "DELETE",
-      `/api/users/${id}/delete-friend`,
+      `${endpoint}/api/users/${id}/delete-friend`,
       null,
       userTypes.DELETE_FRIEND_SUCCESS,
       userTypes.DELETE_FRIEND_FAIL
@@ -235,6 +239,12 @@ export const setLoading = (bool = true) => (dispatch) => {
   dispatch({
     type: userTypes.SET_LOADING,
     payload: bool,
+  });
+};
+
+export const setLoadingImage = () => (dispatch) => {
+  dispatch({
+    type: userTypes.SET_LOADING_IMAGE,
   });
 };
 

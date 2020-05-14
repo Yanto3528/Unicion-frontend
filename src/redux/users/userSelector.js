@@ -12,6 +12,11 @@ export const selectLoading = createSelector(
   (user) => user.loading
 );
 
+export const selectLoadingImage = createSelector(
+  [selectUserState],
+  (user) => user.loadingImage
+);
+
 export const selectUser = createSelector(
   [selectUserState],
   (user) => user.user

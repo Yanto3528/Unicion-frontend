@@ -8,25 +8,26 @@ import {
   selectLoadingPosts,
 } from "../../../redux/posts/postSelector";
 
-import Spinner from "../../shared/Spinner/Spinner";
 import Post from "../Post/Post";
+import Spinner from "../../shared/Spinner/Spinner";
+
+import { PostListContainer } from "./PostListStyle";
 
 const PostList = ({ posts, loadingPosts }) => {
-  if (loadingPosts) return <Spinner />;
   return (
-    <div>
+    <PostListContainer>
+      {loadingPosts && <Spinner transparent />}
       {posts.length > 0 ? (
         posts.map((post) => <Post key={post._id} post={post} />)
       ) : (
         <h2>No post yet. Please add some friend to see their posts.</h2>
       )}
-    </div>
+    </PostListContainer>
   );
 };
 
 PostList.propTypes = {
   posts: PropTypes.array.isRequired,
-  loadingPosts: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
